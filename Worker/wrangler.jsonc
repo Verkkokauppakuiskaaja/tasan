@@ -1,0 +1,9 @@
+{
+  "name": "tasan-ai",
+  "compatibility_date": "2026-08-03",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "./worker.js",
+  "vars": {
+    "CLAUDE_MODEL": "claude-haiku-5-5"
+  }
+}

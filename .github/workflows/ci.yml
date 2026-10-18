@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  core-tests:
+    name: TasanCore tests (Linux)
+    runs-on: ubuntu-latest
+    container: swift:6.1
+    steps:
+      - uses: actions/checkout@v4
+      - run: swift test --package-path Packages/TasanCore
+
+  worker-tests:
+    name: Tasan AI worker tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Worker
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm test
+
+  ios-build:
+    name: iOS app build (simulator)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Regenerate Xcode project
+        run: |
+          brew install xcodegen
+          xcodegen generate
+      - name: Build
+        run: |
+          xcodebuild build \
+            -project Tasan.xcodeproj \
+            -scheme Tasan \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            -quiet

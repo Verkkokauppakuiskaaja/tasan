@@ -1,0 +1,640 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		007094B6DBF380F0C27783AE /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8268FBDB828FF0D986CB26A /* SecondaryButton.swift */; };
+		023A7CF9C78E5767192FC180 /* Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D4F227CE5693A03049853C /* Radius.swift */; };
+		04DFDEC6546787B55CF2737A /* TasanCore in Frameworks */ = {isa = PBXBuildFile; productRef = CD6689E65DC917EA7C8AADC9 /* TasanCore */; };
+		060591899C95D0032D3ED75D /* CalendarSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AA11B7DC6A3779DFF642D6 /* CalendarSync.swift */; };
+		11C2EAB9F8F069D1786C5CC0 /* YearClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2D27F91A3AB718E274C017 /* YearClockView.swift */; };
+		1A6D8B8975A4E8EECE1C30DD /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7115A903FC72DC1709C012 /* TaskDetailView.swift */; };
+		20025BF747078783D79E7F7F /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC414813CB1535AE746F7DE7 /* TodayView.swift */; };
+		20A188643F922178ECDBF1C4 /* OCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634F053604BE407008AC28F5 /* OCRService.swift */; };
+		211C098EDA7743CCF6209BD4 /* TasanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9859CF6641C3E116A9FC3222 /* TasanApp.swift */; };
+		21C21EC05A1107EE844D9C26 /* FamilyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB3129868B2716C19376DB6 /* FamilyStore.swift */; };
+		2355D794191B92D783840192 /* MeetingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0F491883014403D5F1FF9D /* MeetingView.swift */; };
+		363F0F3C2FD0FD649492D3F3 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50ED166D37BE4E6C3F29C2DE /* OnboardingView.swift */; };
+		38C69C8D44239CE1F17F9199 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896C53905FEF75D7BFAA06D5 /* Colors.swift */; };
+		3F577041B53D10D18AE4ACEF /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C68B1BED4F9B967613D41E6 /* RootView.swift */; };
+		41369756FF539C3C37AB31C1 /* Shadows.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81707C66002CD0F01FE8DE4 /* Shadows.swift */; };
+		4F11FBE4248E99A9BBC8D876 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5697F50A30E595F6AA5999 /* NotificationService.swift */; };
+		52F1773E352886E9AD79B55D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD49614B5C4EF54A0D9FD65C /* SettingsView.swift */; };
+		537A3EB0A8E69F61C4B83BED /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB80F6E48B74AEA97C27487 /* PrimaryButton.swift */; };
+		5734A65D9DE914EC0014C1CB /* TasanComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D9AA0D75E412E4D6C73BF6 /* TasanComponents.swift */; };
+		57991B0C083B9D91FA6859E9 /* TransferSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70BDD28A58758121CB73D2B /* TransferSheet.swift */; };
+		599A58601B5E44BEFD5FBE7B /* EventExtractionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101BB1F63521B54EC2E8F29A /* EventExtractionService.swift */; };
+		5AFAD5FEBCDBDCB96816AEB0 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACC04C3ED8746FF08456B44 /* ImagePicker.swift */; };
+		5DA4DBACD3A7D642281DD571 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D3AE4684AE5C0C68C6C128 /* AppModel.swift */; };
+		6129C4CD6A6F268D6FC2424D /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5725D5B6D93A3D75B785140 /* TaskRow.swift */; };
+		706B1366046E98058EB48CC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF7C7188A01AE7CFBD89F81F /* Assets.xcassets */; };
+		74B13DA76DE8C2B1AAE7C54E /* TaskEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D34BE1A52501F9BDE10CDBE /* TaskEditorView.swift */; };
+		768BA613E9E0AC1FF64EB1AA /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 59E6445EDB17501EE8CFFCDA /* PrivacyInfo.xcprivacy */; };
+		7E60918FACE6C43E056427A2 /* DeviceContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21469CFB1A3923FF93C9AE3 /* DeviceContext.swift */; };
+		803D4A8FE3E7A2F1DA729E99 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0C7C045997545253F7BE89 /* Spacing.swift */; };
+		832C5D86C9E1FC4D5CCA9C95 /* AppleCalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A3F188613E2C3E65CAAC1F /* AppleCalendarService.swift */; };
+		8CC290E42CF93C2A50BD3837 /* GoogleCalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28811CA823D9CDB324CA9C00 /* GoogleCalendarService.swift */; };
+		91CCB516776C091A00FF25FB /* LoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECA50F1AA11A0B22706ADE8 /* LoadView.swift */; };
+		997CCA86C4BEE18AE6003467 /* CloudSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D17675DD387003526E8EF7 /* CloudSync.swift */; };
+		9BCBA48834A84ED36A8D0FBF /* JoinFamilyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D3962156B86C63E0AFB9E2 /* JoinFamilyView.swift */; };
+		A3E79FA170AE8B08E716605E /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAC70B25A1E787EF6B50004 /* Badge.swift */; };
+		A907AA703C1EE67D900FBFC2 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B3C98B4C21CA3EE2172E5 /* Typography.swift */; };
+		D6ADC560B7FF2186F60DF15E /* FamilyCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8BE0D39DDF5213EC2315CA /* FamilyCalendarView.swift */; };
+		DC61E324B79042100DA4D814 /* ProcessingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD50A3F6C6E3E5222FC8E49 /* ProcessingOverlay.swift */; };
+		EE001C483032D7CDD1D5A3EB /* ActionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32BC15D46A52E9D5B7A7418 /* ActionCard.swift */; };
+		F7ECA9A5C549753EDE46A4FC /* TitleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97C4723AAC249A248F32C8D /* TitleSection.swift */; };
+		FD615840D581669E527A3F5C /* ImageImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B0BF76B20668A98847ABFC /* ImageImportView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		08D3962156B86C63E0AFB9E2 /* JoinFamilyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinFamilyView.swift; sourceTree = "<group>"; };
+		101BB1F63521B54EC2E8F29A /* EventExtractionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventExtractionService.swift; sourceTree = "<group>"; };
+		1D7115A903FC72DC1709C012 /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
+		28811CA823D9CDB324CA9C00 /* GoogleCalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCalendarService.swift; sourceTree = "<group>"; };
+		2C0C7C045997545253F7BE89 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
+		2C8BE0D39DDF5213EC2315CA /* FamilyCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyCalendarView.swift; sourceTree = "<group>"; };
+		32D33CFC306940AB37BD787A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		41D17675DD387003526E8EF7 /* CloudSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSync.swift; sourceTree = "<group>"; };
+		4D34BE1A52501F9BDE10CDBE /* TaskEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditorView.swift; sourceTree = "<group>"; };
+		50ED166D37BE4E6C3F29C2DE /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		59E6445EDB17501EE8CFFCDA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		5EB3129868B2716C19376DB6 /* FamilyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyStore.swift; sourceTree = "<group>"; };
+		634F053604BE407008AC28F5 /* OCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRService.swift; sourceTree = "<group>"; };
+		64B0BF76B20668A98847ABFC /* ImageImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageImportView.swift; sourceTree = "<group>"; };
+		6C68B1BED4F9B967613D41E6 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		7ECA50F1AA11A0B22706ADE8 /* LoadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadView.swift; sourceTree = "<group>"; };
+		85D3AE4684AE5C0C68C6C128 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		896C53905FEF75D7BFAA06D5 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		8F5697F50A30E595F6AA5999 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		9859CF6641C3E116A9FC3222 /* TasanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasanApp.swift; sourceTree = "<group>"; };
+		9FD50A3F6C6E3E5222FC8E49 /* ProcessingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingOverlay.swift; sourceTree = "<group>"; };
+		A8268FBDB828FF0D986CB26A /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
+		A97C4723AAC249A248F32C8D /* TitleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSection.swift; sourceTree = "<group>"; };
+		AD0F491883014403D5F1FF9D /* MeetingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingView.swift; sourceTree = "<group>"; };
+		B21469CFB1A3923FF93C9AE3 /* DeviceContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceContext.swift; sourceTree = "<group>"; };
+		B7D4F227CE5693A03049853C /* Radius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radius.swift; sourceTree = "<group>"; };
+		BB325963AD43400CF130BABB /* Tasan.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Tasan.xcconfig; sourceTree = "<group>"; };
+		BF168F611CCF735EE2F90DD2 /* TasanCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TasanCore; path = Packages/TasanCore; sourceTree = SOURCE_ROOT; };
+		C012769EC867FCC81B3D4B40 /* Tasan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tasan.entitlements; sourceTree = "<group>"; };
+		C7A3F188613E2C3E65CAAC1F /* AppleCalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleCalendarService.swift; sourceTree = "<group>"; };
+		CACC04C3ED8746FF08456B44 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		CC9B3C98B4C21CA3EE2172E5 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		CD49614B5C4EF54A0D9FD65C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D5AA11B7DC6A3779DFF642D6 /* CalendarSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSync.swift; sourceTree = "<group>"; };
+		D5D9AA0D75E412E4D6C73BF6 /* TasanComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasanComponents.swift; sourceTree = "<group>"; };
+		D81707C66002CD0F01FE8DE4 /* Shadows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadows.swift; sourceTree = "<group>"; };
+		DF7C7188A01AE7CFBD89F81F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E32BC15D46A52E9D5B7A7418 /* ActionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCard.swift; sourceTree = "<group>"; };
+		EB2D27F91A3AB718E274C017 /* YearClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearClockView.swift; sourceTree = "<group>"; };
+		EC414813CB1535AE746F7DE7 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		EEB80F6E48B74AEA97C27487 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		EEF30B03C2FC90C8B3CA084A /* Tasan.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Tasan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5725D5B6D93A3D75B785140 /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
+		F70BDD28A58758121CB73D2B /* TransferSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferSheet.swift; sourceTree = "<group>"; };
+		FFAC70B25A1E787EF6B50004 /* Badge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FCD204BA2F8055CD38C5619C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04DFDEC6546787B55CF2737A /* TasanCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1D39223A5C62F523A39B6117 = {
+			isa = PBXGroup;
+			children = (
+				FC35F8670850DE9F30D2B7DC /* Config */,
+				4C2E100CE26922EA1DA47240 /* Packages */,
+				63683A5C542CEE6DD5E521EA /* Tasan */,
+				458AB8D68D8954FA6D108C5B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		28A2AB46ED6116A5A109678B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C7A3F188613E2C3E65CAAC1F /* AppleCalendarService.swift */,
+				D5AA11B7DC6A3779DFF642D6 /* CalendarSync.swift */,
+				41D17675DD387003526E8EF7 /* CloudSync.swift */,
+				B21469CFB1A3923FF93C9AE3 /* DeviceContext.swift */,
+				101BB1F63521B54EC2E8F29A /* EventExtractionService.swift */,
+				5EB3129868B2716C19376DB6 /* FamilyStore.swift */,
+				28811CA823D9CDB324CA9C00 /* GoogleCalendarService.swift */,
+				8F5697F50A30E595F6AA5999 /* NotificationService.swift */,
+				634F053604BE407008AC28F5 /* OCRService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3C6DE31746239E903443AA2A /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				08D3962156B86C63E0AFB9E2 /* JoinFamilyView.swift */,
+				50ED166D37BE4E6C3F29C2DE /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		41CBB35A696A93F07FF5C623 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				2C8BE0D39DDF5213EC2315CA /* FamilyCalendarView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		458AB8D68D8954FA6D108C5B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EEF30B03C2FC90C8B3CA084A /* Tasan.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C2E100CE26922EA1DA47240 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				BF168F611CCF735EE2F90DD2 /* TasanCore */,
+			);
+			path = Packages;
+			sourceTree = "<group>";
+		};
+		56D98E2836DB41A869C07DEB /* Import */ = {
+			isa = PBXGroup;
+			children = (
+				64B0BF76B20668A98847ABFC /* ImageImportView.swift */,
+			);
+			path = Import;
+			sourceTree = "<group>";
+		};
+		591134E528CC17004022A857 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				896C53905FEF75D7BFAA06D5 /* Colors.swift */,
+				B7D4F227CE5693A03049853C /* Radius.swift */,
+				D81707C66002CD0F01FE8DE4 /* Shadows.swift */,
+				2C0C7C045997545253F7BE89 /* Spacing.swift */,
+				CC9B3C98B4C21CA3EE2172E5 /* Typography.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		63683A5C542CEE6DD5E521EA /* Tasan */ = {
+			isa = PBXGroup;
+			children = (
+				94F81F19AF23252DDB4D5A04 /* App */,
+				F20A8133ADA96B2BB5358A97 /* Components */,
+				591134E528CC17004022A857 /* DesignSystem */,
+				9D3F4FCB14A5E9579AE1EAE9 /* Features */,
+				A7969F12AB6F17122C052793 /* Resources */,
+				28A2AB46ED6116A5A109678B /* Services */,
+			);
+			path = Tasan;
+			sourceTree = "<group>";
+		};
+		7837814BAD99E0030B21E0CD /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				1D7115A903FC72DC1709C012 /* TaskDetailView.swift */,
+				4D34BE1A52501F9BDE10CDBE /* TaskEditorView.swift */,
+				F70BDD28A58758121CB73D2B /* TransferSheet.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		819826B4F479DE918CA98394 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CD49614B5C4EF54A0D9FD65C /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		85CFDD5CD31BE1D167A9F6B3 /* Load */ = {
+			isa = PBXGroup;
+			children = (
+				7ECA50F1AA11A0B22706ADE8 /* LoadView.swift */,
+			);
+			path = Load;
+			sourceTree = "<group>";
+		};
+		94F81F19AF23252DDB4D5A04 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				85D3AE4684AE5C0C68C6C128 /* AppModel.swift */,
+				6C68B1BED4F9B967613D41E6 /* RootView.swift */,
+				9859CF6641C3E116A9FC3222 /* TasanApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		97D00C8D3DD09FA7D96621FB /* Meeting */ = {
+			isa = PBXGroup;
+			children = (
+				AD0F491883014403D5F1FF9D /* MeetingView.swift */,
+			);
+			path = Meeting;
+			sourceTree = "<group>";
+		};
+		9D3F4FCB14A5E9579AE1EAE9 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				41CBB35A696A93F07FF5C623 /* Calendar */,
+				56D98E2836DB41A869C07DEB /* Import */,
+				85CFDD5CD31BE1D167A9F6B3 /* Load */,
+				97D00C8D3DD09FA7D96621FB /* Meeting */,
+				3C6DE31746239E903443AA2A /* Onboarding */,
+				819826B4F479DE918CA98394 /* Settings */,
+				7837814BAD99E0030B21E0CD /* Tasks */,
+				D7D163094691A578F1E23210 /* Today */,
+				BE2A11D0A808468036C5318E /* YearClock */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		A7969F12AB6F17122C052793 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DF7C7188A01AE7CFBD89F81F /* Assets.xcassets */,
+				32D33CFC306940AB37BD787A /* Info.plist */,
+				59E6445EDB17501EE8CFFCDA /* PrivacyInfo.xcprivacy */,
+				C012769EC867FCC81B3D4B40 /* Tasan.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BE2A11D0A808468036C5318E /* YearClock */ = {
+			isa = PBXGroup;
+			children = (
+				EB2D27F91A3AB718E274C017 /* YearClockView.swift */,
+			);
+			path = YearClock;
+			sourceTree = "<group>";
+		};
+		D7D163094691A578F1E23210 /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				EC414813CB1535AE746F7DE7 /* TodayView.swift */,
+			);
+			path = Today;
+			sourceTree = "<group>";
+		};
+		F20A8133ADA96B2BB5358A97 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E32BC15D46A52E9D5B7A7418 /* ActionCard.swift */,
+				FFAC70B25A1E787EF6B50004 /* Badge.swift */,
+				CACC04C3ED8746FF08456B44 /* ImagePicker.swift */,
+				EEB80F6E48B74AEA97C27487 /* PrimaryButton.swift */,
+				9FD50A3F6C6E3E5222FC8E49 /* ProcessingOverlay.swift */,
+				A8268FBDB828FF0D986CB26A /* SecondaryButton.swift */,
+				D5D9AA0D75E412E4D6C73BF6 /* TasanComponents.swift */,
+				F5725D5B6D93A3D75B785140 /* TaskRow.swift */,
+				A97C4723AAC249A248F32C8D /* TitleSection.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		FC35F8670850DE9F30D2B7DC /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				BB325963AD43400CF130BABB /* Tasan.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C77B2F560A59E974E983C1EC /* Tasan */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6329C94794194CD800452FE6 /* Build configuration list for PBXNativeTarget "Tasan" */;
+			buildPhases = (
+				7A7A56364BD297E78BCE5AB6 /* Sources */,
+				546DBAD3B93D8CAAD5F265E4 /* Resources */,
+				FCD204BA2F8055CD38C5619C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tasan;
+			packageProductDependencies = (
+				CD6689E65DC917EA7C8AADC9 /* TasanCore */,
+			);
+			productName = Tasan;
+			productReference = EEF30B03C2FC90C8B3CA084A /* Tasan.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		44CD105538E0CD5D70AA6C54 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					C77B2F560A59E974E983C1EC = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 3078BC858DE956B31A000432 /* Build configuration list for PBXProject "Tasan" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = fi;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				fi,
+			);
+			mainGroup = 1D39223A5C62F523A39B6117;
+			packageReferences = (
+				56D5068156CE986139BE96D0 /* XCLocalSwiftPackageReference "Packages/TasanCore" */,
+			);
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C77B2F560A59E974E983C1EC /* Tasan */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		546DBAD3B93D8CAAD5F265E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				706B1366046E98058EB48CC6 /* Assets.xcassets in Resources */,
+				768BA613E9E0AC1FF64EB1AA /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7A7A56364BD297E78BCE5AB6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE001C483032D7CDD1D5A3EB /* ActionCard.swift in Sources */,
+				5DA4DBACD3A7D642281DD571 /* AppModel.swift in Sources */,
+				832C5D86C9E1FC4D5CCA9C95 /* AppleCalendarService.swift in Sources */,
+				A3E79FA170AE8B08E716605E /* Badge.swift in Sources */,
+				060591899C95D0032D3ED75D /* CalendarSync.swift in Sources */,
+				997CCA86C4BEE18AE6003467 /* CloudSync.swift in Sources */,
+				38C69C8D44239CE1F17F9199 /* Colors.swift in Sources */,
+				7E60918FACE6C43E056427A2 /* DeviceContext.swift in Sources */,
+				599A58601B5E44BEFD5FBE7B /* EventExtractionService.swift in Sources */,
+				D6ADC560B7FF2186F60DF15E /* FamilyCalendarView.swift in Sources */,
+				21C21EC05A1107EE844D9C26 /* FamilyStore.swift in Sources */,
+				8CC290E42CF93C2A50BD3837 /* GoogleCalendarService.swift in Sources */,
+				FD615840D581669E527A3F5C /* ImageImportView.swift in Sources */,
+				5AFAD5FEBCDBDCB96816AEB0 /* ImagePicker.swift in Sources */,
+				9BCBA48834A84ED36A8D0FBF /* JoinFamilyView.swift in Sources */,
+				91CCB516776C091A00FF25FB /* LoadView.swift in Sources */,
+				2355D794191B92D783840192 /* MeetingView.swift in Sources */,
+				4F11FBE4248E99A9BBC8D876 /* NotificationService.swift in Sources */,
+				20A188643F922178ECDBF1C4 /* OCRService.swift in Sources */,
+				363F0F3C2FD0FD649492D3F3 /* OnboardingView.swift in Sources */,
+				537A3EB0A8E69F61C4B83BED /* PrimaryButton.swift in Sources */,
+				DC61E324B79042100DA4D814 /* ProcessingOverlay.swift in Sources */,
+				023A7CF9C78E5767192FC180 /* Radius.swift in Sources */,
+				3F577041B53D10D18AE4ACEF /* RootView.swift in Sources */,
+				007094B6DBF380F0C27783AE /* SecondaryButton.swift in Sources */,
+				52F1773E352886E9AD79B55D /* SettingsView.swift in Sources */,
+				41369756FF539C3C37AB31C1 /* Shadows.swift in Sources */,
+				803D4A8FE3E7A2F1DA729E99 /* Spacing.swift in Sources */,
+				211C098EDA7743CCF6209BD4 /* TasanApp.swift in Sources */,
+				5734A65D9DE914EC0014C1CB /* TasanComponents.swift in Sources */,
+				1A6D8B8975A4E8EECE1C30DD /* TaskDetailView.swift in Sources */,
+				74B13DA76DE8C2B1AAE7C54E /* TaskEditorView.swift in Sources */,
+				6129C4CD6A6F268D6FC2424D /* TaskRow.swift in Sources */,
+				F7ECA9A5C549753EDE46A4FC /* TitleSection.swift in Sources */,
+				20025BF747078783D79E7F7F /* TodayView.swift in Sources */,
+				57991B0C083B9D91FA6859E9 /* TransferSheet.swift in Sources */,
+				A907AA703C1EE67D900FBFC2 /* Typography.swift in Sources */,
+				11C2EAB9F8F069D1786C5CC0 /* YearClockView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6BC18360C7379F7EC930FAE1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D7198301AA4F28AF32214C0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		DC14B06CB62F3D586039A259 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB325963AD43400CF130BABB /* Tasan.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Tasan/Resources/Tasan.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Tasan/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = fi.tasan.app;
+				PRODUCT_NAME = Tasan;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		F2F64F769039F6552A260863 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB325963AD43400CF130BABB /* Tasan.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Tasan/Resources/Tasan.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Tasan/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = fi.tasan.app;
+				PRODUCT_NAME = Tasan;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3078BC858DE956B31A000432 /* Build configuration list for PBXProject "Tasan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7198301AA4F28AF32214C0E /* Debug */,
+				6BC18360C7379F7EC930FAE1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6329C94794194CD800452FE6 /* Build configuration list for PBXNativeTarget "Tasan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC14B06CB62F3D586039A259 /* Debug */,
+				F2F64F769039F6552A260863 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		56D5068156CE986139BE96D0 /* XCLocalSwiftPackageReference "Packages/TasanCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/TasanCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CD6689E65DC917EA7C8AADC9 /* TasanCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TasanCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 44CD105538E0CD5D70AA6C54 /* Project object */;
+}

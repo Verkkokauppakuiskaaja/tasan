@@ -1,0 +1,12 @@
+// Shared build settings. Put your own values in Secrets.xcconfig (not committed).
+DEVELOPMENT_TEAM =
+GOOGLE_CLIENT_ID =
+GOOGLE_REVERSED_CLIENT_ID = com.googleusercontent.apps.unset
+
+// Tasan!'s own Claude service (Worker/). Host only: "//" starts a comment in xcconfig.
+// TASAN_AI_KEY must match the worker's APP_KEY secret. It ships in the app, so it keeps
+// bots out but is not a secret.
+TASAN_AI_HOST = tasan-ai.jussi-9cc.workers.dev
+TASAN_AI_KEY = 9f21e0b73bf138fa8b5a1e12daba6e88a4fce637cbe497a4
+
+#include? "Secrets.xcconfig"
