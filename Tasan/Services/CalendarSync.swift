@@ -91,7 +91,8 @@ final class CalendarSync {
     for task in state.tasks where task.status == .open && task.responsibleID == me {
       let link = URL(string: "tasan://task/\(task.id.uuidString)")!
       let subject = state.member(task.subjectMemberID)?.name
-      let notes = [task.notes, subject.map { "Koskee: \($0)" }].compactMap { $0 }.joined(separator: "\n")
+      let title = state.displayTitle(of: task)
+      let notes = [state.displayNotes(of: task), subject.map { String(localized: "Koskee: \($0)") }].compactMap { $0 }.joined(separator: "\n")
 
       if let day = task.eventDay {
         let start = task.eventMinutes.map { day.date(minutes: $0, calendar: calendar) } ?? day.date(calendar: calendar)
@@ -100,7 +101,7 @@ final class CalendarSync {
           : start
         result["\(task.id)|event"] = CalendarEntry(
           key: "\(task.id)|event",
-          title: task.title,
+          title: title,
           notes: notes.isEmpty ? nil : notes,
           location: task.location,
           start: start,
@@ -114,7 +115,7 @@ final class CalendarSync {
         let start = prep.date(calendar: calendar)
         result["\(task.id)|prep"] = CalendarEntry(
           key: "\(task.id)|prep",
-          title: "Valmistele: \(task.title)",
+          title: String(localized: "Valmistele: \(title)"),
           notes: notes.isEmpty ? nil : notes,
           location: nil,
           start: start,

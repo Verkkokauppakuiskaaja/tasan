@@ -7,20 +7,20 @@ struct Wordmark: View {
   var textColor: Color = AppColor.textPrimary
 
   var body: some View {
-    (Text("Tasan")
+    (Text(verbatim: "Tasan")
       .fontWeight(.semibold)
-      + Text("!")
+      + Text(verbatim: "!")
       .fontWeight(.heavy)
       .foregroundColor(AppColor.detail))
       .font(.system(size: fontSize))
       .foregroundColor(textColor)
-      .accessibilityLabel("Tasan")
+      .accessibilityLabel(Text(verbatim: "Tasan!"))
   }
 }
 
 struct Tagline: View {
   var body: some View {
-    Text("share the family load")
+    Text(verbatim: "share the family load")
       .font(AppTypography.bodyMedium)
       .foregroundColor(AppColor.textSecondary)
   }
@@ -113,7 +113,7 @@ struct MemberAvatar: View {
       }
     }
     .frame(width: size, height: size)
-    .accessibilityLabel(member?.name ?? "Avoin")
+    .accessibilityLabel(member?.name ?? String(localized: "Avoin"))
   }
 }
 

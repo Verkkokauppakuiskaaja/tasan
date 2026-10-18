@@ -51,7 +51,7 @@ struct SettingsView: View {
             Toggle("Viikkopalaverin muistutus", isOn: Binding(get: { family.weeklyMeeting.enabled }, set: { var f = family; f.weeklyMeeting.enabled = $0; model.save(f) }))
             if family.weeklyMeeting.enabled {
               Picker("Päivä", selection: Binding(get: { family.weeklyMeeting.weekday }, set: { var f = family; f.weeklyMeeting.weekday = $0; model.save(f) })) {
-                ForEach(1...7, id: \.self) { Text(FinnishCalendar.weekdayNames[$0 - 1].capitalized).tag($0) }
+                ForEach(1...7, id: \.self) { Text(DateText.weekdayName($0).capitalized(with: .current)).tag($0) }
               }
               DatePicker(
                 "Kello",
@@ -83,7 +83,7 @@ struct SettingsView: View {
               }
             }
           if model.calendars.google.isSignedIn {
-            Toggle("Google-kalenteri (\(model.calendars.google.accountEmail ?? "kirjautunut"))", isOn: $googleEnabled)
+            Toggle("Google-kalenteri (\(model.calendars.google.accountEmail ?? String(localized: "kirjautunut")))", isOn: $googleEnabled)
               .onChange(of: googleEnabled) { _, on in
                 model.calendars.googleEnabled = on
                 model.calendarSettingsChanged()
@@ -129,11 +129,11 @@ struct SettingsView: View {
         }
 
         Section {
-          Button(model.isOwner ? "Poista perhe ja lopeta jakaminen" : "Poistu perheestä", role: .destructive) {
+          Button(model.isOwner ? String(localized: "Poista perhe ja lopeta jakaminen") : String(localized: "Poistu perheestä"), role: .destructive) {
             isConfirmingLeave = true
           }
         } footer: {
-          Text("Tasan! \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")")
+          Text(verbatim: "Tasan! \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")")
         }
       }
       .navigationTitle("Asetukset")
@@ -146,14 +146,14 @@ struct SettingsView: View {
         MemberEditorView(member: Member(name: "", colorHex: Member.palette[state.members.count % Member.palette.count], role: .child), isNew: true)
       }
       .confirmationDialog("Oletko varma?", isPresented: $isConfirmingLeave, titleVisibility: .visible) {
-        Button(model.isOwner ? "Poista perhe" : "Poistu", role: .destructive) {
+        Button(model.isOwner ? String(localized: "Poista perhe") : String(localized: "Poistu"), role: .destructive) {
           Task {
             await model.leaveFamily()
             dismiss()
           }
         }
       } message: {
-        Text(model.isOwner ? "Perheen tiedot poistetaan iCloudista molemmilta aikuisilta." : "Tiedot poistuvat tästä puhelimesta. Voit liittyä uudelleen kutsulla.")
+        Text(model.isOwner ? String(localized: "Perheen tiedot poistetaan iCloudista molemmilta aikuisilta.") : String(localized: "Tiedot poistuvat tästä puhelimesta. Voit liittyä uudelleen kutsulla."))
       }
       .onAppear {
         appleEnabled = model.calendars.appleEnabled
@@ -164,11 +164,13 @@ struct SettingsView: View {
 
   private func roleText(_ member: Member) -> String {
     switch member.role {
-    case .adminAdult: return "Aikuinen, ylläpitäjä"
-    case .adult: return member.cloudUserID == nil ? "Aikuinen, ei vielä liittynyt" : "Aikuinen"
-    case .child: return [member.schoolClass.map { "\($0) lk" }, member.school].compactMap { $0 }.joined(separator: ", ").nonEmpty ?? "Lapsi"
-    case .teen: return "Teini"
-    case .helper: return "Apulainen"
+    case .adminAdult: return String(localized: "Aikuinen, ylläpitäjä")
+    case .adult: return member.cloudUserID == nil ? String(localized: "Aikuinen, ei vielä liittynyt") : String(localized: "Aikuinen")
+    case .child:
+      return [member.schoolClass.map { String(localized: "\($0) lk", comment: "School class, e.g. 3 lk") }, member.school]
+        .compactMap { $0 }.joined(separator: ", ").nonEmpty ?? String(localized: "Lapsi")
+    case .teen: return String(localized: "Teini")
+    case .helper: return String(localized: "Apulainen")
     }
   }
 }
@@ -223,8 +225,7 @@ struct MemberEditorView: View {
           }
         }
       }
-      .environment(\.locale, Locale(identifier: "fi_FI"))
-      .navigationTitle(isNew ? "Uusi lapsi" : member.name)
+      .navigationTitle(isNew ? String(localized: "Uusi lapsi") : member.name)
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .cancellationAction) { Button("Peru") { dismiss() } }

@@ -26,7 +26,7 @@ struct ImageImportView: View {
     NavigationStack {
       Screen {
         VStack(alignment: .leading, spacing: AppSpacing.lg) {
-          TitleSection(title: "Kuvasta tapahtumaksi", subtitle: "Koulun tiedote, synttärikutsu tai kuvakaappaus. Tasan! poimii tapahtuman ja valmistelun.")
+          TitleSection(title: String(localized: "Kuvasta tapahtumaksi"), subtitle: String(localized: "Koulun tiedote, synttärikutsu tai kuvakaappaus. Tasan! poimii tapahtuman ja valmistelun."))
 
           if let image {
             Image(uiImage: image)
@@ -36,12 +36,12 @@ struct ImageImportView: View {
               .frame(maxWidth: .infinity)
               .clipShape(RoundedRectangle(cornerRadius: AppRadius.image, style: .continuous))
               .overlay {
-                if isProcessing { ProcessingOverlay(message: "Luetaan kuvaa ja etsitään tapahtumia…") }
+                if isProcessing { ProcessingOverlay(message: String(localized: "Luetaan kuvaa ja etsitään tapahtumia…")) }
               }
           }
 
           if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            ActionCard(title: "Ota kuva", subtitle: "Kuvaa tiedote tai kutsu", icon: "camera.fill", color: AppColor.primary) {
+            ActionCard(title: String(localized: "Ota kuva"), subtitle: String(localized: "Kuvaa tiedote tai kutsu"), icon: "camera.fill", color: AppColor.primary) {
               isShowingCamera = true
             }
             .disabled(isProcessing)
@@ -73,19 +73,19 @@ struct ImageImportView: View {
           }
 
           if !events.isEmpty {
-            SectionHeader(title: events.count == 1 ? "Löytyi tapahtuma" : "Löytyi \(events.count) tapahtumaa", subtitle: "Valitse lisättävä")
+            SectionHeader(title: String(localized: "Löytyi \(events.count) tapahtumaa"), subtitle: String(localized: "Valitse lisättävä"))
             ForEach(events) { event in
               Button {
                 selected = event
               } label: {
                 Card {
-                  Text(event.title.isEmpty ? "Nimetön tapahtuma" : event.title)
+                  Text(event.title.isEmpty ? String(localized: "Nimetön tapahtuma") : event.title)
                     .font(AppTypography.headline)
                     .foregroundColor(AppColor.textPrimary)
                   if let start = event.start {
                     Text(start.formatted(event.isAllDay
-                      ? .dateTime.locale(Locale(identifier: "fi_FI")).weekday().day().month()
-                      : .dateTime.locale(Locale(identifier: "fi_FI")).weekday().day().month().hour().minute()))
+                      ? .dateTime.weekday().day().month()
+                      : .dateTime.weekday().day().month().hour().minute()))
                       .font(AppTypography.body)
                       .foregroundColor(AppColor.textSecondary)
                   }
@@ -96,7 +96,7 @@ struct ImageImportView: View {
                     Label(preparation, systemImage: "checklist").font(AppTypography.caption).foregroundColor(AppColor.textSecondary)
                   }
                   if !event.isComplete {
-                    Pill(text: "Tarkista tiedot", systemImage: "exclamationmark.circle", color: AppColor.detail)
+                    Pill(text: String(localized: "Tarkista tiedot"), systemImage: "exclamationmark.circle", color: AppColor.detail)
                   }
                 }
               }
@@ -164,11 +164,23 @@ struct ImageImportView: View {
     }
     let text = [event.title, event.notes ?? "", event.location ?? ""].joined(separator: " ").lowercased()
     let rules: [(AreaKind, [String])] = [
-      (.parties, ["synttär", "syntymäpäiv", "juhla", "kutsu", "party", "birthday"]),
-      (.hobbies, ["treeni", "harjoitu", "turnaus", "ottelu", "kisa", "leiri", "seura", "kerho", "tanssi", "uinti", "jalkapallo", "salibandy", "jääkiekko"]),
-      (.school, ["koulu", "päiväkoti", "luokka", "retki", "vanhempainilta", "opettaja", "valokuvaus", "eskari"]),
-      (.holidays, ["joulu", "pääsiäi", "vappu", "halloween", "juhannus", "äitienpäivä", "isänpäivä"]),
-      (.clothing, ["vaate", "haalari", "kengät", "kirpputori"]),
+      // Finnish, Swedish and English words, since a notice can be in any of them.
+      (.parties, ["synttär", "syntymäpäiv", "juhla", "kutsu", "party", "birthday", "födelsedag", "kalas", "fest", "inbjudan", "invitation"]),
+      (.hobbies, [
+        "treeni", "harjoitu", "turnaus", "ottelu", "kisa", "leiri", "seura", "kerho", "tanssi", "uinti", "jalkapallo", "salibandy", "jääkiekko",
+        "träning", "turnering", "match", "läger", "klubb", "dans", "simning", "fotboll", "innebandy", "ishockey",
+        "practice", "training", "tournament", "camp", "club", "swimming", "football", "soccer", "hockey",
+      ]),
+      (.school, [
+        "koulu", "päiväkoti", "luokka", "retki", "vanhempainilta", "opettaja", "valokuvaus", "eskari",
+        "skola", "daghem", "förskola", "klass", "utflykt", "föräldramöte", "lärare", "fotografering",
+        "school", "daycare", "class", "field trip", "parent", "teacher", "photo day",
+      ]),
+      (.holidays, [
+        "joulu", "pääsiäi", "vappu", "halloween", "juhannus", "äitienpäivä", "isänpäivä",
+        "julfest", "lucia", "påsk", "valborg", "midsommar", "morsdag", "farsdag", "christmas", "easter", "midsummer", "mother's day", "father's day",
+      ]),
+      (.clothing, ["vaate", "haalari", "kengät", "kirpputori", "kläder", "overall", "skor", "loppis", "clothes", "shoes", "flea market"]),
     ]
     guard let kind = rules.first(where: { _, words in words.contains { text.contains($0) } })?.0 else { return nil }
     return state.areas.first { $0.kind == kind && $0.enabled && $0.subjectMemberID == nil }
@@ -199,8 +211,8 @@ struct AIConsentSheet: View {
           .font(.body)
           .foregroundColor(AppColor.textSecondary)
           .fixedSize(horizontal: false, vertical: true)
-        PrimaryButton(title: "Hyväksyn", systemImage: "checkmark", action: onAccept)
-        SecondaryButton(title: "Ei nyt", action: onDecline)
+        PrimaryButton(title: String(localized: "Hyväksyn"), systemImage: "checkmark", action: onAccept)
+        SecondaryButton(title: String(localized: "Ei nyt"), action: onDecline)
       }
       .padding(.top, AppSpacing.xl)
     }

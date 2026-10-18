@@ -30,8 +30,8 @@ struct JoinFamilyView: View {
             .padding(.top, AppSpacing.xxl)
           } else {
             TitleSection(
-              title: "Tervetuloa perheeseen \(model.state.family?.name ?? "")",
-              subtitle: "Kuka sinä olet? Valitse oma profiilisi tai lisää itsesi."
+              title: String(localized: "Tervetuloa perheeseen \(model.state.family?.name ?? "")"),
+              subtitle: String(localized: "Kuka sinä olet? Valitse oma profiilisi tai lisää itsesi.")
             )
 
             ForEach(unclaimedAdults) { adult in
@@ -55,7 +55,7 @@ struct JoinFamilyView: View {
             Card {
               LabeledField("Uusi aikuinen", text: $newName, prompt: "Sinun nimesi")
               ColorPickerRow(selection: $color)
-              PrimaryButton(title: "Lisää minut", systemImage: "person.badge.plus") {
+              PrimaryButton(title: String(localized: "Lisää minut"), systemImage: "person.badge.plus") {
                 model.claim(nil, newName: newName.trimmingCharacters(in: .whitespaces), color: color)
               }
               .disabled(newName.trimmingCharacters(in: .whitespaces).isEmpty)

@@ -282,3 +282,36 @@ final class SyncStateTests: XCTestCase {
     XCTAssertEqual(RecordRef(recordName: ref.recordName), ref)
   }
 }
+
+final class CoreTextTests: XCTestCase {
+  override func tearDown() {
+    CoreText.lookup = { $0 }
+  }
+
+  func testFillsPlaceholders() {
+    XCTAssertEqual(CoreText.fill("%@: %@ → %@", ["A", "B", "C"]), "A: B → C")
+    XCTAssertEqual(CoreText.fill("%2$@ ja %1$@", ["A", "B"]), "B ja A")
+    XCTAssertEqual(CoreText.fill("100 %% %@", ["x"]), "100 % x")
+  }
+
+  func testStoredDataStaysFinnishAndShowsTranslated() throws {
+    let mom = Member(name: "Äiti", colorHex: "2560F5", role: .adminAdult)
+    let liisa = Member(name: "Liisa", colorHex: "16A349", role: .child)
+    var state = FamilyState.newFamily(name: "Virtanen", admin: mom)
+    state.save(liisa)
+    YearClock().generateTasks(in: &state, today: Day(2026, 10, 1), actorID: mom.id)
+
+    CoreText.lookup = { ["Halloween-asu": "Halloween costume", "Vaatteet ja varusteet": "Clothes and gear"][$0] ?? $0 }
+
+    let halloween = try XCTUnwrap(state.tasks.first { $0.title == "Halloween-asu" })
+    XCTAssertEqual(state.displayTitle(of: halloween), "Halloween costume")
+    let clothing = try XCTUnwrap(state.areas.first { $0.kind == .clothing })
+    XCTAssertEqual(clothing.name, "Vaatteet ja varusteet")
+    XCTAssertEqual(clothing.displayName, "Clothes and gear")
+
+    // An edited title is the family's own text and is shown as written.
+    var edited = halloween
+    edited.title = "Halloween-asu Liisalle"
+    XCTAssertEqual(state.displayTitle(of: edited), "Halloween-asu Liisalle")
+  }
+}

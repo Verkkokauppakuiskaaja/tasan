@@ -2,16 +2,14 @@ import SwiftUI
 import TasanCore
 
 extension Day {
-  /// "tänään", "huomenna", "la 24.10." — how a Finn reads a near date.
+  /// "tänään", "huomenna", "la 24.10.": a near date the way people say it, in the current language.
   func relativeText(today: Day = .today()) -> String {
     let distance = today.days(until: self)
     switch distance {
-    case 0: return "tänään"
-    case 1: return "huomenna"
-    case -1: return "eilen"
-    default:
-      let weekday = FinnishCalendar.weekdayShortNames[isoWeekday() - 1]
-      return year == today.year ? "\(weekday) \(finnishShortString)" : "\(weekday) \(finnishString)"
+    case 0: return String(localized: "tänään")
+    case 1: return String(localized: "huomenna")
+    case -1: return String(localized: "eilen")
+    default: return DateText.weekdayDayMonth(self, today: today)
     }
   }
 }
@@ -20,17 +18,17 @@ extension FamilyTask {
   func timeText(today: Day = .today()) -> String? {
     var parts: [String] = []
     if let prep = prepDay, prep != eventDay {
-      parts.append("Valmistelu \(prep.relativeText(today: today))")
+      parts.append(String(localized: "Valmistelu \(prep.relativeText(today: today))"))
     }
     if let event = eventDay {
       var text = event.relativeText(today: today)
       if let minutes = eventMinutes {
-        text += String(format: " klo %d.%02d", minutes / 60, minutes % 60)
+        text += " " + String(localized: "klo \(DateText.time(minutes: minutes))")
       }
       if parts.isEmpty {
         parts.append(text.prefix(1).uppercased() + String(text.dropFirst()))
       } else {
-        parts.append("tapahtuma \(text)")
+        parts.append(String(localized: "tapahtuma \(text)"))
       }
     }
     return parts.isEmpty ? nil : parts.joined(separator: " · ")
@@ -56,7 +54,7 @@ struct TaskRow: View {
         MemberAvatar(member: state.member(task.responsibleID), size: 34)
       }
       VStack(alignment: .leading, spacing: AppSpacing.xxs) {
-        Text(task.title)
+        Text(state.displayTitle(of: task))
           .font(AppTypography.bodyMedium)
           .foregroundColor(task.status == .open ? AppColor.textPrimary : AppColor.textSecondary)
           .strikethrough(task.status == .done)
@@ -68,16 +66,16 @@ struct TaskRow: View {
         }
         HStack(spacing: AppSpacing.xxs) {
           if let area {
-            Pill(text: area.name, systemImage: area.kind.symbolName, color: area.kind.color)
+            Pill(text: area.displayName, systemImage: area.kind.symbolName, color: area.kind.color)
           }
           if let back = task.temporaryReturn {
-            Pill(text: "Palaa \(state.member(back.memberID)?.name ?? "") \(back.day.finnishShortString)", systemImage: "arrow.uturn.backward", color: AppColor.detail)
+            Pill(text: String(localized: "Palaa \(state.member(back.memberID)?.name ?? "") \(DateText.dayMonth(back.day))"), systemImage: "arrow.uturn.backward", color: AppColor.detail)
           }
           if pending != nil {
-            Pill(text: "Siirto odottaa", systemImage: "hourglass", color: AppColor.detail)
+            Pill(text: String(localized: "Siirto odottaa"), systemImage: "hourglass", color: AppColor.detail)
           }
           if task.responsibleID == nil && task.status == .open {
-            Pill(text: "Avoin", systemImage: "hand.raised", color: AppColor.success)
+            Pill(text: String(localized: "Avoin"), systemImage: "hand.raised", color: AppColor.success)
           }
         }
       }

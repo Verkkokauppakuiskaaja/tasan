@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { afterEach, test } from "node:test";
 
 import worker from "../worker.js";
+import { normalizeDeviceContext } from "../lib/deviceContext.js";
 
 const env = {
   APP_KEY: "test-key",
@@ -132,4 +133,38 @@ test("a refusal is an error, not an empty event", async () => {
   const response = await post({ ocrText: "jotain", deviceContext });
   assert.notEqual(response.status, 200);
   assert.equal((await response.json()).ok, false);
+});
+
+test("asks for the preparation in the app's language", async () => {
+  mockClaude([
+    {
+      status: "ready",
+      title: "Luokkaretki Nuuksioon",
+      startDate: "2026-10-23T09:00:00+03:00",
+      endDate: null,
+      startYearIsExplicit: false,
+      endYearIsExplicit: false,
+      isAllDay: false,
+      location: "Nuuksio",
+      urlString: null,
+      notes: null,
+      timeZoneIdentifier: "Europe/Helsinki",
+      areaKind: "school",
+      preparation: "Matsäck och vattenflaska",
+    },
+  ]);
+  const response = await post({
+    ocrText: "Luokkaretki Nuuksioon pe 23.10. klo 9. Mukaan eväät ja juomapullo.",
+    deviceContext: { ...deviceContext, appLanguage: "sv" },
+  });
+  assert.equal(response.status, 200);
+  assert.ok(JSON.stringify(sentBody.messages).includes('\\"appLanguage\\": \\"sv\\"'));
+  assert.ok(sentBody.system.includes("deviceContext.appLanguage"));
+});
+
+test("appLanguage is optional and limited to the app's languages", () => {
+  assert.equal(normalizeDeviceContext(deviceContext).appLanguage, undefined);
+  assert.equal(normalizeDeviceContext({ ...deviceContext, appLanguage: "en-GB" }).appLanguage, "en");
+  assert.equal(normalizeDeviceContext({ ...deviceContext, appLanguage: "de" }).appLanguage, undefined);
+  assert.throws(() => normalizeDeviceContext({ ...deviceContext, appLanguage: 5 }));
 });

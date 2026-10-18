@@ -156,15 +156,15 @@ enum ExtractionError: LocalizedError {
 
   var errorDescription: String? {
     switch self {
-    case .noText: return "Kuvasta ei löytynyt luettavaa tekstiä."
-    case .tooLong: return "Kuvassa on liikaa tekstiä. Rajaa kuva tapahtuman kohtaan."
-    case .noEvents: return "Kuvasta ei löytynyt tapahtumaa. Voit lisätä sen käsin."
-    case .network: return "Palveluun ei saatu yhteyttä. Tarkista verkkoyhteys."
-    case .timedOut: return "Lukeminen kesti liian kauan. Yritä uudelleen."
-    case .busy: return "Palvelu on ruuhkainen. Odota hetki ja yritä uudelleen."
-    case .serviceUnavailable: return "Palvelu ei ole juuri nyt käytettävissä."
-    case .invalidResponse: return "Palvelu palautti odottamattoman vastauksen."
-    case .notConfigured: return "Kuvasta tapahtumaksi -palvelua ei ole määritetty tähän versioon (TASAN_AI_HOST puuttuu)."
+    case .noText: return String(localized: "Kuvasta ei löytynyt luettavaa tekstiä.")
+    case .tooLong: return String(localized: "Kuvassa on liikaa tekstiä. Rajaa kuva tapahtuman kohtaan.")
+    case .noEvents: return String(localized: "Kuvasta ei löytynyt tapahtumaa. Voit lisätä sen käsin.")
+    case .network: return String(localized: "Palveluun ei saatu yhteyttä. Tarkista verkkoyhteys.")
+    case .timedOut: return String(localized: "Lukeminen kesti liian kauan. Yritä uudelleen.")
+    case .busy: return String(localized: "Palvelu on ruuhkainen. Odota hetki ja yritä uudelleen.")
+    case .serviceUnavailable: return String(localized: "Palvelu ei ole juuri nyt käytettävissä.")
+    case .invalidResponse: return String(localized: "Palvelu palautti odottamattoman vastauksen.")
+    case .notConfigured: return String(localized: "Kuvasta tapahtumaksi -palvelua ei ole määritetty tähän versioon (TASAN_AI_HOST puuttuu).")
     }
   }
 }

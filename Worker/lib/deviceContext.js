@@ -3,6 +3,14 @@ const MAX_CONTEXT_STRING_LENGTH = 80;
 const ALLOWED_MEASUREMENT_SYSTEMS =
   new Set(["metric", "us", "uk"]);
 
+/*
+ * Languages the app is translated into. Older app versions send
+ * no appLanguage, and then the preparation hint keeps the source
+ * event's language as before.
+ */
+const APP_LANGUAGES =
+  new Set(["fi", "en", "sv"]);
+
 const REFERENCE_DATE_PATTERN =
   /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[+-]\d{2}:?\d{2})$/i;
 
@@ -73,6 +81,11 @@ export function normalizeDeviceContext(
     );
   }
 
+  const appLanguage =
+    normalizeAppLanguage(
+      input.appLanguage
+    );
+
   return {
     locale,
     timeZoneIdentifier,
@@ -85,6 +98,9 @@ export function normalizeDeviceContext(
       normalizeReferenceDate(
         input.referenceDate
       ),
+    ...(appLanguage
+      ? { appLanguage }
+      : {}),
   };
 }
 
@@ -125,6 +141,31 @@ export function isValidTimeZone(
   } catch {
     return false;
   }
+}
+
+function normalizeAppLanguage(
+  value
+) {
+  if (
+    value === undefined
+    || value === null
+    || value === ""
+  ) {
+    return null;
+  }
+
+  if (typeof value !== "string") {
+    throw new DeviceContextValidationError(
+      "appLanguage must be a string"
+    );
+  }
+
+  const language =
+    value.trim().toLowerCase().split(/[-_]/)[0];
+
+  return APP_LANGUAGES.has(language)
+    ? language
+    : null;
 }
 
 function normalizeReferenceDate(

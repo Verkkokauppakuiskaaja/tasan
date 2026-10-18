@@ -31,6 +31,15 @@ Ulkoasu (värit, kortit, painikkeet, typografia) ja kuvasta tapahtumaksi -teknii
 - **Kalenteri:** sovellus kirjoittaa omaan Tasan!-kalenteriinsa (Apple ja Google erikseen), ei käyttäjän omiin kalentereihin. Muita kalentereita vain luetaan. Kukin puhelin kirjoittaa vain oman käyttäjänsä vastuut, joten siirron jälkeen merkintä siirtyy toisen kalenteriin, kun hänen puhelimensa synkronoi.
 - **Talvirenkaat** ja muut koti ja auto -asiat jätettiin pois, koska osa-alue on rajattu MVP:n ulkopuolelle.
 
+## Kieliversiot
+
+Sovellus on suomeksi, englanniksi ja ruotsiksi ja seuraa puhelimen kieltä (tai iOS:n sovelluskohtaista kieliasetusta). Jos puhelimen kieli on jokin muu, sovellus on englanniksi.
+
+- Tekstit ovat Xcoden String Catalogeissa: `Tasan/Resources/Localizable.xcstrings` (näkymät), `Core.xcstrings` (TasanCoren säännöt ja vuosikellon mallit) ja `InfoPlist.xcstrings` (lupakysymykset). Suomi on lähdekieli; käännöksiä voi muokata Xcodessa avaamalla tiedoston.
+- Perheen tallennetut tiedot (osa-alueiden ja vuosikellon oletusnimet, vuosikellon tehtävät) pysyvät suomeksi, ja ne käännetään vasta näytettäessä. Näin kaksi eri kielellä olevaa puhelinta näkevät saman perheen omalla kielellään. Itse kirjoitettu tai muokattu teksti näytetään sellaisenaan.
+- Päivämäärät ja kellonajat noudattavat puhelimen alueasetuksia.
+- Kuvasta tapahtumaksi säilyttää tapahtuman nimen ja tiedot alkuperäisellä kielellä, mutta kirjoittaa valmisteluohjeen sovelluksen kielellä.
+
 ## Rakenne
 
 ```
@@ -46,7 +55,7 @@ project.yml          XcodeGen-määrittely; Tasan.xcodeproj on generoitu siitä
 
 ## Mitä on tarkistettu ja mitä ei
 
-- **Tarkistettu:** `TasanCore` kääntyy ja sen 25 testiä menevät läpi (Swift 6.1, Linux). Testit kattavat pääsiäisen ja liikkuvat pyhät, vuosikellon tehtävät lokakuulle, kahden puhelimen samat tehtävä-id:t, siirron hyväksynnän, kieltäytymisen, väliaikaisen siirron paluun, osa-aluesiirron, avoimet tehtävät, avun pyytämisen, jakonäkymän, palaverin agendan ja synkronoinnin "uudempi voittaa" -säännön. Xcode-projekti generoitui XcodeGenillä.
+- **Tarkistettu:** `TasanCore` kääntyy ja sen 27 testiä menevät läpi (Swift 6.1, Linux). Testit kattavat pääsiäisen ja liikkuvat pyhät, vuosikellon tehtävät lokakuulle, kahden puhelimen samat tehtävä-id:t, siirron hyväksynnän, kieltäytymisen, väliaikaisen siirron paluun, osa-aluesiirron, avoimet tehtävät, avun pyytämisen, jakonäkymän, palaverin agendan ja synkronoinnin "uudempi voittaa" -säännön sekä sen, että tallennettu suomenkielinen data näytetään käännettynä. Xcode-projekti generoitui XcodeGenillä.
 - **Ei tarkistettu:** iOS-sovelluksen koodia (SwiftUI, CloudKit, EventKit, Google) ei ole käännetty, koska Xcodea ei ole Linuxilla. Ensimmäisellä Xcode-käännöksellä voi tulla pieniä käännösvirheitä. CloudKit-jakoa, kalenterikirjoitusta ja ilmoituksia ei ole ajettu laitteella. Repo sisältää GitHub Actions -työnkulun, joka kääntää sovelluksen macOS-koneella heti kun koodi on GitHubissa.
 
 ## Käyttöönotto Xcodessa

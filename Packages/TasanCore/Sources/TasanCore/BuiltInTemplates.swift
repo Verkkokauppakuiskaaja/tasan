@@ -11,6 +11,10 @@ public enum BuiltInTemplates {
     clothing + school + hobbies + parties + holidays
   }
 
+  static let byKey: [String: YearTemplate] = Dictionary(
+    uniqueKeysWithValues: all().compactMap { template in template.builtInKey.map { ($0, template) } }
+  )
+
   private static func t(
     _ key: String,
     _ kind: AreaKind,

@@ -5,14 +5,14 @@ struct Badge: View {
 
   var body: some View {
     if value > 0 {
-      Text("\(value)")
+      Text(verbatim: "\(value)")
         .font(.caption2.weight(.bold))
         .foregroundColor(.white)
         .frame(minWidth: 18, minHeight: 18)
         .padding(.horizontal, AppSpacing.xxs)
         .background(AppColor.detail)
         .clipShape(Capsule())
-        .accessibilityLabel("\(value) kpl")
+        .accessibilityLabel(Text("\(value) kpl"))
     }
   }
 }

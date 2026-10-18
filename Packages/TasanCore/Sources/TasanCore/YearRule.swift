@@ -55,43 +55,9 @@ public enum YearRule: Codable, Equatable, Sendable {
     if case .birthday = self { return true }
     return false
   }
-
-  /// Short Finnish description for the year clock editor.
-  public var finnishDescription: String {
-    switch self {
-    case let .fixed(month, day):
-      return "\(day).\(month). joka vuosi"
-    case let .nthWeekday(month, weekday, n):
-      let ordinal = n == -1 ? "viimeinen" : "\(n)."
-      return "\(FinnishCalendar.monthNames[month - 1]): \(ordinal) \(FinnishCalendar.weekdayNames[weekday - 1])"
-    case let .easter(offset):
-      if offset == 0 { return "Pääsiäispäivä" }
-      return offset < 0 ? "\(-offset) pv ennen pääsiäistä" : "\(offset) pv pääsiäisen jälkeen"
-    case let .isoWeek(week, weekday):
-      return "Viikko \(week), \(FinnishCalendar.weekdayNames[weekday - 1])"
-    case .winterHoliday:
-      return "Hiihtoloman alku"
-    case .midsummerEve:
-      return "Juhannusaatto"
-    case let .birthday(offset):
-      if offset == 0 { return "Lapsen syntymäpäivä" }
-      return offset < 0 ? "\(-offset) pv ennen syntymäpäivää" : "\(offset) pv syntymäpäivän jälkeen"
-    }
-  }
 }
 
 public enum FinnishCalendar {
-  public static let monthNames = [
-    "Tammikuu", "Helmikuu", "Maaliskuu", "Huhtikuu", "Toukokuu", "Kesäkuu",
-    "Heinäkuu", "Elokuu", "Syyskuu", "Lokakuu", "Marraskuu", "Joulukuu",
-  ]
-
-  public static let weekdayNames = [
-    "maanantai", "tiistai", "keskiviikko", "torstai", "perjantai", "lauantai", "sunnuntai",
-  ]
-
-  public static let weekdayShortNames = ["ma", "ti", "ke", "to", "pe", "la", "su"]
-
   /// Gregorian Easter Sunday (anonymous Gregorian algorithm).
   public static func easterSunday(_ year: Int) -> Day {
     let a = year % 19

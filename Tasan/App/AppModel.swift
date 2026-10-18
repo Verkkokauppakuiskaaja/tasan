@@ -36,6 +36,7 @@ final class AppModel {
   @ObservationIgnored private var followUp: Task<Void, Never>?
 
   init() {
+    AppLanguage.install()
     state = store.load()
     meID = DeviceSettings.currentMemberID
     sync = CloudSync(
@@ -210,7 +211,7 @@ final class AppModel {
     do {
       try await sync.startAsOwner(familyID: newState.family!.id, initialRecords: newState.allRefs)
     } catch {
-      errorMessage = "Perhe tallentui tähän puhelimeen, mutta iCloud-yhteys ei onnistunut: \(error.localizedDescription). Kirjaudu iCloudiin, niin voit kutsua toisen aikuisen."
+      errorMessage = String(localized: "Perhe tallentui tähän puhelimeen, mutta iCloud-yhteys ei onnistunut: \(error.localizedDescription). Kirjaudu iCloudiin, niin voit kutsua toisen aikuisen.")
     }
     _ = await notifications.requestAuthorization()
     scheduleFollowUp(refreshBusy: false)
@@ -218,13 +219,13 @@ final class AppModel {
 
   /// The share the owner sends to the other adult ("Kutsu aikuinen").
   func invitationShare() async throws -> CKShare {
-    try await sync.familyShare(title: "Tasan! – \(state.family?.name ?? "perhe")")
+    try await sync.familyShare(title: "Tasan! – \(state.family?.name ?? String(localized: "perhe"))")
   }
 
   /// Opened from the iCloud share link on the invited adult's phone.
   func acceptShare(_ metadata: CKShare.Metadata) async {
     guard !hasFamily else {
-      errorMessage = "Tämä puhelin kuuluu jo perheeseen. Poistu ensin nykyisestä perheestä asetuksissa."
+      errorMessage = String(localized: "Tämä puhelin kuuluu jo perheeseen. Poistu ensin nykyisestä perheestä asetuksissa.")
       return
     }
     isJoiningFamily = true
@@ -236,7 +237,7 @@ final class AppModel {
       }
     } catch {
       isJoiningFamily = false
-      errorMessage = "Kutsun avaaminen ei onnistunut: \(error.localizedDescription)"
+      errorMessage = String(localized: "Kutsun avaaminen ei onnistunut: \(error.localizedDescription)")
     }
   }
 
@@ -245,7 +246,7 @@ final class AppModel {
     Task {
       let cloudID = await sync.currentUserRecordName()
       commit { state in
-        var member = state.member(memberID) ?? Member(name: newName ?? "Aikuinen", colorHex: color, role: .adult)
+        var member = state.member(memberID) ?? Member(name: newName ?? String(localized: "Aikuinen"), colorHex: color, role: .adult)
         member.cloudUserID = cloudID
         if !member.role.isAdult { member.role = .adult }
         state.save(member)

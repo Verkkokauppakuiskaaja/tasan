@@ -17,7 +17,11 @@ struct TransferSheet: View {
   @State private var returnDate = Calendar.finnish.date(byAdding: .day, value: 7, to: Date())!
   @State private var direct = false
 
-  private let suggestions = ["Mulla työmatka, voitko ottaa?", "Mulla on silloin muuta, ehditkö sinä?", "Vaihdetaanko tämä?"]
+  private let suggestions = [
+    String(localized: "Mulla työmatka, voitko ottaa?"),
+    String(localized: "Mulla on silloin muuta, ehditkö sinä?"),
+    String(localized: "Vaihdetaanko tämä?"),
+  ]
 
   var body: some View {
     let state = model.state
@@ -28,9 +32,9 @@ struct TransferSheet: View {
     NavigationStack {
       Screen {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
-          TitleSection(title: "Siirrä vastuu", subtitle: state.subjectTitle(subject))
+          TitleSection(title: String(localized: "Siirrä vastuu"), subtitle: state.subjectTitle(subject))
 
-          SectionHeader(title: "Kenelle")
+          SectionHeader(title: String(localized: "Kenelle"))
           ForEach(candidates) { member in
             Button {
               receiverID = member.id
@@ -57,7 +61,7 @@ struct TransferSheet: View {
               .foregroundColor(AppColor.textSecondary)
           }
 
-          SectionHeader(title: "Viesti")
+          SectionHeader(title: String(localized: "Viesti"))
           Card {
             LabeledField("Viesti vastaanottajalle", text: $message, prompt: "Vapaaehtoinen", axis: .vertical)
             ScrollView(.horizontal, showsIndicators: false) {
@@ -76,7 +80,6 @@ struct TransferSheet: View {
               .font(AppTypography.bodyMedium)
             if isTemporary {
               DatePicker("Palaa minulle", selection: $returnDate, in: Date()..., displayedComponents: .date)
-                .environment(\.locale, Locale(identifier: "fi_FI"))
               Text("Vastuu palaa automaattisesti valittuna päivänä, esimerkiksi loman tai työmatkan jälkeen.")
                 .font(AppTypography.caption)
                 .foregroundColor(AppColor.textSecondary)
@@ -90,7 +93,7 @@ struct TransferSheet: View {
         }
       }
       .safeAreaInset(edge: .bottom) {
-        PrimaryButton(title: direct ? "Siirrä" : "Lähetä pyyntö", systemImage: "paperplane.fill") {
+        PrimaryButton(title: direct ? String(localized: "Siirrä") : String(localized: "Lähetä pyyntö"), systemImage: "paperplane.fill") {
           guard let receiverID else { return }
           let returnDay = isTemporary ? Day(date: returnDate) : nil
           if model.requestTransfer(subject, to: receiverID, message: message, returnDay: returnDay, direct: direct) {
@@ -113,7 +116,7 @@ struct TransferSheet: View {
 
   private func loadText(_ memberID: UUID, _ state: FamilyState) -> String {
     let count = state.tasks.filter { $0.status == .open && $0.responsibleID == memberID }.count
-    return "\(count) avointa vastuuta"
+    return String(localized: "\(count) avointa vastuuta")
   }
 }
 
@@ -147,10 +150,9 @@ struct HelpSheet: View {
           }
           TextField("Viesti", text: $message, axis: .vertical)
         } footer: {
-          Text("\(parent.title) pysyy sinun vastuullasi. Auttaja saa osatehtävän omaan listaansa ja kalenteriinsa, kun hyväksyy.")
+          Text("\(state.displayTitle(of: parent)) pysyy sinun vastuullasi. Auttaja saa osatehtävän omaan listaansa ja kalenteriinsa, kun hyväksyy.")
         }
       }
-      .environment(\.locale, Locale(identifier: "fi_FI"))
       .navigationTitle("Pyydä apua")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {

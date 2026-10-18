@@ -18,7 +18,7 @@ struct LoadView: View {
     NavigationStack {
       Screen {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
-          TitleSection(title: "Kuka kantaa mitäkin", subtitle: "Avoimet vastuut nyt. Tasataan yhdessä, ei lasketa pisteitä.")
+          TitleSection(title: String(localized: "Kuka kantaa mitäkin"), subtitle: String(localized: "Avoimet vastuut nyt. Tasataan yhdessä, ei lasketa pisteitä."))
 
           shareBar(summary, state)
 
@@ -34,14 +34,14 @@ struct LoadView: View {
             }
           }
 
-          SectionHeader(title: "Osa-alueet", subtitle: "Uudet tehtävät menevät omistajalle")
+          SectionHeader(title: String(localized: "Osa-alueet"), subtitle: String(localized: "Uudet tehtävät menevät omistajalle"))
           Card {
             ForEach(state.areas.filter(\.enabled)) { area in
               areaRow(area, state)
               if area.id != state.areas.filter(\.enabled).last?.id { Divider() }
             }
           }
-          SecondaryButton(title: "Lisää osa-alue, esim. Liisan harrastukset", systemImage: "plus") { isAddingArea = true }
+          SecondaryButton(title: String(localized: "Lisää osa-alue, esim. Liisan harrastukset"), systemImage: "plus") { isAddingArea = true }
         }
       }
       .navigationDestination(for: UUID.self) { TaskDetailView(taskID: $0) }
@@ -70,7 +70,7 @@ struct LoadView: View {
       HStack {
         ForEach(summary.rows) { row in
           if let member = state.member(row.memberID) {
-            Text("\(member.name) \(Int((summary.share(of: member.id) * 100).rounded())) %")
+            Text(verbatim: "\(member.name) \(summary.share(of: member.id).formatted(.percent.precision(.fractionLength(0))))")
               .font(AppTypography.caption.weight(.semibold))
               .foregroundColor(Color(hexString: member.colorHex))
             Spacer()
@@ -98,7 +98,7 @@ struct LoadView: View {
           let count = row.tasksByArea[area.id] ?? 0
           if count > 0 || area.ownerID == row.memberID {
             Pill(
-              text: "\(area.name) \(count)\(area.ownerID == row.memberID ? " ★" : "")",
+              text: "\(area.displayName) \(count)\(area.ownerID == row.memberID ? " ★" : "")",
               systemImage: area.kind.symbolName,
               color: area.kind.color
             )
@@ -121,7 +121,7 @@ struct LoadView: View {
         .foregroundColor(area.kind.color)
         .frame(width: 32)
       VStack(alignment: .leading, spacing: 2) {
-        Text(area.name).font(AppTypography.bodyMedium)
+        Text(area.displayName).font(AppTypography.bodyMedium)
         if let pending = state.pendingTransfer(for: .area(area.id)) {
           Text("Odottaa: \(state.member(pending.toID)?.name ?? "")").font(AppTypography.caption).foregroundColor(AppColor.detail)
         }
@@ -219,7 +219,9 @@ struct AreaEditorView: View {
         ToolbarItem(placement: .cancellationAction) { Button("Peru") { dismiss() } }
         ToolbarItem(placement: .confirmationAction) {
           Button("Tallenna") {
-            model.save(Area(kind: kind, name: name, ownerID: ownerID, subjectMemberID: subjectID))
+            // The suggested default name is stored in Finnish, so every phone shows it in its own language.
+            let stored = name == kind.title ? kind.finnishTitle : name
+            model.save(Area(kind: kind, name: stored, ownerID: ownerID, subjectMemberID: subjectID))
             dismiss()
           }
           .disabled(name.isEmpty)
@@ -230,7 +232,7 @@ struct AreaEditorView: View {
 
   private func suggestName(_ state: FamilyState) {
     if let child = state.member(subjectID) {
-      name = "\(child.name): \(kind.title.lowercased())"
+      name = "\(child.name): \(kind.title.lowercased(with: .current))"
     } else {
       name = kind.title
     }

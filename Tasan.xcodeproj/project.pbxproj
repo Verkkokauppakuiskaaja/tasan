@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F0B67F82A481FB714166A225 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 74BAAB523075582339FAA68B /* InfoPlist.xcstrings */; };
+		094B549908366567E432A690 /* Core.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A82AFE6C31EAF13AD7BB8BFB /* Core.xcstrings */; };
+		00E2ABA2EF89AE821BED4354 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 55CE4950F01D4A03A5A0B2B2 /* Localizable.xcstrings */; };
+		2C29CEC42A22753B3C1A71CB /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53D88160C50D499E33EAA78 /* Localization.swift */; };
 		007094B6DBF380F0C27783AE /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8268FBDB828FF0D986CB26A /* SecondaryButton.swift */; };
 		023A7CF9C78E5767192FC180 /* Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D4F227CE5693A03049853C /* Radius.swift */; };
 		04DFDEC6546787B55CF2737A /* TasanCore in Frameworks */ = {isa = PBXBuildFile; productRef = CD6689E65DC917EA7C8AADC9 /* TasanCore */; };
@@ -51,6 +55,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		74BAAB523075582339FAA68B /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		A82AFE6C31EAF13AD7BB8BFB /* Core.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Core.xcstrings; sourceTree = "<group>"; };
+		55CE4950F01D4A03A5A0B2B2 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		E53D88160C50D499E33EAA78 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		08D3962156B86C63E0AFB9E2 /* JoinFamilyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinFamilyView.swift; sourceTree = "<group>"; };
 		101BB1F63521B54EC2E8F29A /* EventExtractionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventExtractionService.swift; sourceTree = "<group>"; };
 		1D7115A903FC72DC1709C012 /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
@@ -232,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				85D3AE4684AE5C0C68C6C128 /* AppModel.swift */,
+				E53D88160C50D499E33EAA78 /* Localization.swift */,
 				6C68B1BED4F9B967613D41E6 /* RootView.swift */,
 				9859CF6641C3E116A9FC3222 /* TasanApp.swift */,
 			);
@@ -266,6 +275,9 @@
 			isa = PBXGroup;
 			children = (
 				DF7C7188A01AE7CFBD89F81F /* Assets.xcassets */,
+				74BAAB523075582339FAA68B /* InfoPlist.xcstrings */,
+				A82AFE6C31EAF13AD7BB8BFB /* Core.xcstrings */,
+				55CE4950F01D4A03A5A0B2B2 /* Localizable.xcstrings */,
 				32D33CFC306940AB37BD787A /* Info.plist */,
 				59E6445EDB17501EE8CFFCDA /* PrivacyInfo.xcprivacy */,
 				C012769EC867FCC81B3D4B40 /* Tasan.entitlements */,
@@ -357,7 +369,9 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
+				en,
 				fi,
+				sv,
 			);
 			mainGroup = 1D39223A5C62F523A39B6117;
 			packageReferences = (
@@ -377,6 +391,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				706B1366046E98058EB48CC6 /* Assets.xcassets in Resources */,
+				F0B67F82A481FB714166A225 /* InfoPlist.xcstrings in Resources */,
+				094B549908366567E432A690 /* Core.xcstrings in Resources */,
+				00E2ABA2EF89AE821BED4354 /* Localizable.xcstrings in Resources */,
 				768BA613E9E0AC1FF64EB1AA /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +429,7 @@
 				DC61E324B79042100DA4D814 /* ProcessingOverlay.swift in Sources */,
 				023A7CF9C78E5767192FC180 /* Radius.swift in Sources */,
 				3F577041B53D10D18AE4ACEF /* RootView.swift in Sources */,
+				2C29CEC42A22753B3C1A71CB /* Localization.swift in Sources */,
 				007094B6DBF380F0C27783AE /* SecondaryButton.swift in Sources */,
 				52F1773E352886E9AD79B55D /* SettingsView.swift in Sources */,
 				41369756FF539C3C37AB31C1 /* Shadows.swift in Sources */,
@@ -570,6 +588,8 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fi.tasan.app;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				PRODUCT_NAME = Tasan;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
@@ -592,6 +612,8 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fi.tasan.app;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				PRODUCT_NAME = Tasan;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;

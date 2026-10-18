@@ -1,0 +1,1247 @@
+{
+  "sourceLanguage" : "fi",
+  "strings" : {
+    "%@: %@ otti hoitaakseen" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@: %2$@ took it on"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@: %2$@ tog sig an den"
+          }
+        }
+      }
+    },
+    "%@: %@ → %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@: %2$@ → %3$@"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@: %2$@ → %3$@"
+          }
+        }
+      }
+    },
+    "%@: avattiin kenen tahansa otettavaksi" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: opened for anyone to take"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: öppnades för vem som helst att ta"
+          }
+        }
+      }
+    },
+    "%@: kuitattu hoidetuksi" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: marked done"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@: markerad som klar"
+          }
+        }
+      }
+    },
+    "%@: pyydetty apua (%@)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@: help requested (%2$@)"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@: bad om hjälp (%2$@)"
+          }
+        }
+      }
+    },
+    "%@: pyyntö %@ odottaa vastausta" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@: request to %2$@ awaiting an answer"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@: begäran till %2$@ väntar på svar"
+          }
+        }
+      }
+    },
+    "Asiaa ei löytynyt." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That item couldn't be found."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Det gick inte att hitta."
+          }
+        }
+      }
+    },
+    "Halloween-asu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Halloween costume"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Halloweendräkt"
+          }
+        }
+      }
+    },
+    "Harrastukset" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hobbies"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hobbyer"
+          }
+        }
+      }
+    },
+    "Harrastusvälineiden koot" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hobby gear sizes"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Storlekar på hobbyutrustning"
+          }
+        }
+      }
+    },
+    "Heijastimet ja pyörän valot" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reflectors and bike lights"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reflexer och cykellysen"
+          }
+        }
+      }
+    },
+    "Hiihtoloman järjestelyt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Winter holiday arrangements"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrangemang för sportlovet"
+          }
+        }
+      }
+    },
+    "Hoito, lomat, matkat ja ohjelma syyslomaviikolle." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Childcare, time off, trips and plans for the autumn break week."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barnpassning, ledighet, resor och program för höstlovsveckan."
+          }
+        }
+      }
+    },
+    "Hoito, mökki, välineet. Hiihtoloman viikon voi vaihtaa asetuksista." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Childcare, cottage, gear. You can change the winter holiday week in the year clock."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barnpassning, stuga, utrustning. Sportlovsveckan kan du ändra i årsklockan."
+          }
+        }
+      }
+    },
+    "Hän on jo vastuussa tästä." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "They're already responsible for this."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hen är redan ansvarig för det här."
+          }
+        }
+      }
+    },
+    "Isänpäivä" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Father's Day"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Farsdag"
+          }
+        }
+      }
+    },
+    "Joulukalenterit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advent calendars"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julkalendrar"
+          }
+        }
+      }
+    },
+    "Joulukoristelut" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Christmas decorations"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julpynt"
+          }
+        }
+      }
+    },
+    "Joululahjat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Christmas presents"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julklappar"
+          }
+        }
+      }
+    },
+    "Joululoman hoitojärjestelyt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Childcare over the Christmas break"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barnpassning under jullovet"
+          }
+        }
+      }
+    },
+    "Juhannus" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Midsummer"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Midsommar"
+          }
+        }
+      }
+    },
+    "Juhlapyhät" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Holidays"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Högtider"
+          }
+        }
+      }
+    },
+    "Katso päivät koulun viesteistä ja sovi kuka menee." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check the dates in the school's messages and agree who goes."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kolla datumen i skolans meddelanden och kom överens om vem som går."
+          }
+        }
+      }
+    },
+    "Kausivaihto: kesävaatteet esiin" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seasonal swap: summer clothes out"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Säsongsbyte: fram med sommarkläderna"
+          }
+        }
+      }
+    },
+    "Kausivaihto: syysvaatteet esiin" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seasonal swap: autumn clothes out"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Säsongsbyte: fram med höstkläderna"
+          }
+        }
+      }
+    },
+    "Kausivaihto: talvivaatteet esiin" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seasonal swap: winter clothes out"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Säsongsbyte: fram med vinterkläderna"
+          }
+        }
+      }
+    },
+    "Kesäkengät, sandaalit, uikkarit, aurinkohattu." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summer shoes, sandals, swimwear, sun hat."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sommarskor, sandaler, badkläder, solhatt."
+          }
+        }
+      }
+    },
+    "Kesäleirien ilmoittautumiset" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summer camp sign-ups"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anmälan till sommarläger"
+          }
+        }
+      }
+    },
+    "Kesän hoitojärjestelyt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Summer childcare arrangements"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barnpassning under sommaren"
+          }
+        }
+      }
+    },
+    "Kevätjuhla: asu ja kukat opettajalle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "End-of-year celebration: outfit and flowers for the teacher"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vårfest: klädsel och blommor till läraren"
+          }
+        }
+      }
+    },
+    "Kevätkauden harrastusmaksut" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spring term hobby fees"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hobbyavgifter för vårterminen"
+          }
+        }
+      }
+    },
+    "Koulu ja päiväkoti" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "School and daycare"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skola och daghem"
+          }
+        }
+      }
+    },
+    "Koulukuvaus: tarkista päivä" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "School photos: check the date"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skolfotografering: kolla datumet"
+          }
+        }
+      }
+    },
+    "Koulun ja päiväkodin alku" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "School and daycare start"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skolan och daghemmet börjar"
+          }
+        }
+      }
+    },
+    "Koulun joulujuhla: asu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "School Christmas party: outfit"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skolans julfest: klädsel"
+          }
+        }
+      }
+    },
+    "Kurahousut ja kumisaappaat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rain trousers and rubber boots"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regnbyxor och gummistövlar"
+          }
+        }
+      }
+    },
+    "Lapaset, kypärämyssy, villasukat, varahanskat päiväkotiin." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mittens, balaclava, wool socks, spare gloves for daycare."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vantar, balaklava, yllesockor, extra handskar till daghemmet."
+          }
+        }
+      }
+    },
+    "Laskiainen: pulkka ja laskiaispullat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shrovetide: sledge and laskiainen buns"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fastlagen: pulka och fastlagsbullar"
+          }
+        }
+      }
+    },
+    "Leirit, isovanhemmat, lomat. Sovi viikot ajoissa." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Camps, grandparents, time off. Agree on the weeks in good time."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Läger, mor- och farföräldrar, semester. Kom överens om veckorna i god tid."
+          }
+        }
+      }
+    },
+    "Luistimet, kypärä, pelikengät, suksien pituus." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skates, helmet, sports shoes, ski length."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skridskor, hjälm, sportskor, skidlängd."
+          }
+        }
+      }
+    },
+    "Lukujärjestys, koulutarvikkeet, reppu, iltapäiväkerho." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timetable, school supplies, backpack, after-school club."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schema, skolmaterial, ryggsäck, eftermiddagsklubb."
+          }
+        }
+      }
+    },
+    "Nimikoinnit koulun ja päiväkodin alkuun" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name labels before school and daycare start"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Namnlappar inför skol- och dagisstarten"
+          }
+        }
+      }
+    },
+    "Osa-alue" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Area"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Område"
+          }
+        }
+      }
+    },
+    "Osa-alue %@ siirtyi" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Area %@ was handed over"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Området %@ överlämnades"
+          }
+        }
+      }
+    },
+    "Paluupäivän pitää olla tulevaisuudessa." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The return day has to be in the future."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Återgångsdagen måste ligga i framtiden."
+          }
+        }
+      }
+    },
+    "Pyyntöön on jo vastattu." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The request has already been answered."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Begäran har redan besvarats."
+          }
+        }
+      }
+    },
+    "Päivä, paikka, kutsut, tarjoilut." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date, place, invitations, food."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datum, plats, inbjudningar, servering."
+          }
+        }
+      }
+    },
+    "Pääsiäinen: koristelut, rairuoho ja munat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Easter: decorations, Easter grass and eggs"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Påsk: pynt, påskgräs och ägg"
+          }
+        }
+      }
+    },
+    "Rairuoho kylvetään noin kaksi viikkoa ennen." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sow the Easter grass about two weeks ahead."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Påskgräset sås ungefär två veckor innan."
+          }
+        }
+      }
+    },
+    "Sovita viime talven toppahaalari ja kengät. Kirjaa uusi koko profiiliin." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try on last winter's snowsuit and boots. Note the new size in the profile."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prova förra vinterns vinteroverall och skor. Skriv in den nya storleken i profilen."
+          }
+        }
+      }
+    },
+    "Suositut leirit täyttyvät helmikuussa." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Popular camps fill up in February."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Populära läger blir fulla i februari."
+          }
+        }
+      }
+    },
+    "Syksyn vanhempainillat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autumn parents' evenings"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Höstens föräldramöten"
+          }
+        }
+      }
+    },
+    "Synttärijuhlat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday party"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Födelsedagskalas"
+          }
+        }
+      }
+    },
+    "Synttärilahja" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday present"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Födelsedagspresent"
+          }
+        }
+      }
+    },
+    "Synttärit ja juhlat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthdays and parties"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Födelsedagar och kalas"
+          }
+        }
+      }
+    },
+    "Syyskauden harrastusmaksut" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autumn term hobby fees"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hobbyavgifter för höstterminen"
+          }
+        }
+      }
+    },
+    "Syyskauden ilmoittautumiset" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autumn term sign-ups"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anmälan till höstterminen"
+          }
+        }
+      }
+    },
+    "Syysloman järjestelyt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autumn break arrangements"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrangemang för höstlovet"
+          }
+        }
+      }
+    },
+    "Tarkista koot ja kunto, hanki puuttuvat." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check sizes and condition, get what's missing."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kolla storlekar och skick, skaffa det som saknas."
+          }
+        }
+      }
+    },
+    "Tehtävä" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Task"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uppgift"
+          }
+        }
+      }
+    },
+    "Toppahaalarin ja talvikenkien koko" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snowsuit and winter boot sizes"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Storlek på vinteroverall och vinterskor"
+          }
+        }
+      }
+    },
+    "Tälle on jo avoin siirtopyyntö." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There's already an open handover request for this."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Det finns redan en öppen begäran om överlämning för det här."
+          }
+        }
+      }
+    },
+    "Tämä jäsen ei voi ottaa vastuita." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This member can't take on responsibilities."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Den här medlemmen kan inte ta på sig ansvar."
+          }
+        }
+      }
+    },
+    "Uusi: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New: %@"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ny: %@"
+          }
+        }
+      }
+    },
+    "Vaatteet ja varusteet" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clothes and gear"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kläder och utrustning"
+          }
+        }
+      }
+    },
+    "Vain pyynnön vastaanottaja voi vastata siihen." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only the receiver of the request can answer it."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bara mottagaren av begäran kan svara på den."
+          }
+        }
+      }
+    },
+    "Vain vastuuhenkilö tai ylläpitäjä voi siirtää vastuun." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Only the responsible person or an admin can hand this over."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bara den ansvariga eller en administratör kan lämna över ansvaret."
+          }
+        }
+      }
+    },
+    "Vappu: ilmapallot, sima ja munkit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vappu (May Day): balloons, sima and doughnuts"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vappen: ballonger, mjöd och munkar"
+          }
+        }
+      }
+    },
+    "Virpominen: noita-asu ja vitsat" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palm Sunday virpominen: witch costume and willow twigs"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palmsöndagens virpande: påskhäxdräkt och videkvistar"
+          }
+        }
+      }
+    },
+    "Välikausihaalari, kurahousut, pipot." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mid-season overall, rain trousers, beanies."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mellansäsongsoverall, regnbyxor, mössor."
+          }
+        }
+      }
+    },
+    "Ystävänpäivä: kortit kavereille" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Friendship Day (Valentine's): cards for friends"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vändagen: kort till kompisarna"
+          }
+        }
+      }
+    },
+    "avoin" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "open"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "öppen"
+          }
+        }
+      }
+    },
+    "Äitienpäivä" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mother's Day"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Morsdag"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

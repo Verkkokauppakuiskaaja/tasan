@@ -92,8 +92,7 @@ public struct YearClock {
   @discardableResult
   public static func createTask(for occurrence: Occurrence, in state: inout FamilyState, today: Day, actorID: UUID?, now: Date = Date()) -> FamilyTask {
     let area = area(for: occurrence.template.areaKind, subject: occurrence.memberID, in: state)
-    let subjectName = state.member(occurrence.memberID)?.name
-    let title = subjectName.map { "\(occurrence.template.title): \($0)" } ?? occurrence.template.title
+    let title = taskTitle(occurrence.template.title, subject: state.member(occurrence.memberID)?.name)
     let familyID = state.family?.id.uuidString ?? ""
     let task = FamilyTask(
       id: UUID(deterministic: "\(familyID)|task|\(occurrence.key)"),
@@ -114,11 +113,16 @@ public struct YearClock {
     state.save(
       HistoryEntry(
         id: UUID(deterministic: "\(familyID)|created|\(occurrence.key)"),
-        subject: .task(task.id), kind: .created, actorID: actorID, toID: task.responsibleID, note: "Vuosikello", date: now
+        subject: .task(task.id), kind: .created, actorID: actorID, toID: task.responsibleID, note: HistoryEntry.yearClockNote, date: now
       ),
       now: generatedStamp
     )
     return task
+  }
+
+  /// "Toppahaalarin koko: Liisa" for a per-child task, the template title otherwise.
+  public static func taskTitle(_ templateTitle: String, subject: String?) -> String {
+    subject.map { "\(templateTitle): \($0)" } ?? templateTitle
   }
 
   /// The most specific enabled area: one narrowed to the child first, then the general one.
