@@ -187,10 +187,10 @@ struct OnboardingView: View {
 struct LabeledField: View {
   let label: LocalizedStringKey
   @Binding var text: String
-  var prompt: LocalizedStringKey = ""
+  var prompt: LocalizedStringKey?
   var axis: Axis = .horizontal
 
-  init(_ label: LocalizedStringKey, text: Binding<String>, prompt: LocalizedStringKey = "", axis: Axis = .horizontal) {
+  init(_ label: LocalizedStringKey, text: Binding<String>, prompt: LocalizedStringKey? = nil, axis: Axis = .horizontal) {
     self.label = label
     self._text = text
     self.prompt = prompt
@@ -202,7 +202,8 @@ struct LabeledField: View {
       Text(label)
         .font(AppTypography.caption)
         .foregroundColor(AppColor.textSecondary)
-      TextField(prompt, text: $text, axis: axis)
+      // An empty verbatim prompt keeps the caption from repeating as a placeholder; the label stays for VoiceOver.
+      TextField(text: $text, prompt: prompt.map { Text($0) } ?? Text(verbatim: ""), axis: axis) { Text(label) }
         .font(AppTypography.body)
         .padding(AppSpacing.sm)
         .background(RoundedRectangle(cornerRadius: AppRadius.small, style: .continuous).fill(AppColor.background))
