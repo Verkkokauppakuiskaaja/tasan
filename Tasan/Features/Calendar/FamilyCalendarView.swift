@@ -34,7 +34,7 @@ struct FamilyCalendarView: View {
       Screen {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
           HStack {
-            TitleSection(title: "Perheen kalenteri", subtitle: "Viikot \(start.isoWeek())–\(start.adding(days: 7).isoWeek())")
+            TitleSection(title: String(localized: "Perheen kalenteri"), subtitle: String(localized: "Viikot \(start.isoWeek())–\(start.adding(days: 7).isoWeek())"))
           }
           HStack {
             Button { weekOffset -= 1 } label: { Image(systemName: "chevron.left") }
@@ -77,13 +77,13 @@ struct FamilyCalendarView: View {
             let dayItems = items(on: day, state: state)
             VStack(alignment: .leading, spacing: AppSpacing.xs) {
               HStack {
-                Text("\(FinnishCalendar.weekdayNames[day.isoWeekday() - 1].capitalized) \(day.finnishShortString)")
+                Text(verbatim: "\(DateText.weekdayName(day.isoWeekday()).capitalized(with: .current)) \(DateText.dayMonth(day))")
                   .font(AppTypography.headline)
                   .foregroundColor(day == Day.today() ? AppColor.primaryForeground : AppColor.textPrimary)
-                if day == Day.today() { Pill(text: "Tänään") }
+                if day == Day.today() { Pill(text: String(localized: "Tänään")) }
               }
               if dayItems.isEmpty {
-                Text("–").foregroundColor(AppColor.textSecondary)
+                Text(verbatim: "–").foregroundColor(AppColor.textSecondary)
               }
               ForEach(dayItems) { item in
                 itemRow(item, state: state)
@@ -114,7 +114,7 @@ struct FamilyCalendarView: View {
           .foregroundColor(item.kind == .external ? AppColor.textSecondary : AppColor.textPrimary)
         HStack(spacing: 6) {
           if let time = item.time { Text(time) }
-          Text(member?.name ?? "Avoin")
+          Text(member?.name ?? String(localized: "Avoin"))
           if item.kind == .prep { Text("· valmistelu") }
         }
         .font(AppTypography.caption)
@@ -137,11 +137,11 @@ struct FamilyCalendarView: View {
     for task in state.tasks where task.status == .open {
       if let member = task.responsibleID, hiddenMembers.contains(member) { continue }
       if task.eventDay == day {
-        let time = task.eventMinutes.map { String(format: "%d.%02d", $0 / 60, $0 % 60) }
-        result.append(Item(id: "\(task.id)|e", kind: .event, title: task.title, time: time, memberID: task.responsibleID, taskID: task.id, order: task.eventMinutes ?? -1))
+        let time = task.eventMinutes.map { DateText.time(minutes: $0) }
+        result.append(Item(id: "\(task.id)|e", kind: .event, title: state.displayTitle(of: task), time: time, memberID: task.responsibleID, taskID: task.id, order: task.eventMinutes ?? -1))
       }
       if let prep = task.prepDay, prep == day, prep != task.eventDay {
-        result.append(Item(id: "\(task.id)|p", kind: .prep, title: task.title, time: nil, memberID: task.responsibleID, taskID: task.id))
+        result.append(Item(id: "\(task.id)|p", kind: .prep, title: state.displayTitle(of: task), time: nil, memberID: task.responsibleID, taskID: task.id))
       }
     }
 
@@ -151,10 +151,7 @@ struct FamilyCalendarView: View {
       let parts = Calendar.finnish.dateComponents([.hour, .minute], from: date)
       return (parts.hour ?? 0) * 60 + (parts.minute ?? 0)
     }
-    let formatter: (Date) -> String = { date in
-      let parts = Calendar.finnish.dateComponents([.hour, .minute], from: date)
-      return String(format: "%d.%02d", parts.hour ?? 0, parts.minute ?? 0)
-    }
+    let formatter: (Date) -> String = { DateText.time($0) }
 
     if let meID = model.meID, !hiddenMembers.contains(meID) {
       for event in model.myEvents where event.start < dayEnd && event.end > dayStart {
@@ -167,7 +164,7 @@ struct FamilyCalendarView: View {
           Item(
             id: "\(busy.id)|\(index)",
             kind: .external,
-            title: block.title ?? "Varattu",
+            title: block.title ?? String(localized: "Varattu"),
             time: block.isAllDay ? nil : "\(formatter(block.start))–\(formatter(block.end))",
             memberID: busy.id,
             taskID: nil,

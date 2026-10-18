@@ -15,7 +15,7 @@ struct TaskDetailView: View {
     if let task = model.state.task(taskID) {
       content(task)
     } else {
-      EmptyState(systemImage: "questionmark", title: "Tehtävää ei löydy", message: "Se on ehkä poistettu toisella puhelimella.")
+      EmptyState(systemImage: "questionmark", title: String(localized: "Tehtävää ei löydy"), message: String(localized: "Se on ehkä poistettu toisella puhelimella."))
     }
   }
 
@@ -31,9 +31,9 @@ struct TaskDetailView: View {
         // What and when
         Card {
           if let area {
-            Pill(text: area.name, systemImage: area.kind.symbolName, color: area.kind.color)
+            Pill(text: area.displayName, systemImage: area.kind.symbolName, color: area.kind.color)
           }
-          Text(task.title)
+          Text(state.displayTitle(of: task))
             .font(AppTypography.title)
             .foregroundColor(AppColor.textPrimary)
           if let subject = state.member(task.subjectMemberID) {
@@ -48,12 +48,12 @@ struct TaskDetailView: View {
             detailRow("hammer", "Valmistelu", prep.relativeText())
           }
           if let reminder = task.reminderDate() {
-            detailRow("bell", "Muistutus", reminder.formatted(.dateTime.locale(Locale(identifier: "fi_FI")).day().month().hour().minute()))
+            detailRow("bell", "Muistutus", reminder.formatted(.dateTime.day().month().hour().minute()))
           }
           if let location = task.location {
             detailRow("mappin.and.ellipse", "Paikka", location)
           }
-          if let notes = task.notes {
+          if let notes = state.displayNotes(of: task) {
             Text(notes)
               .font(AppTypography.body)
               .foregroundColor(AppColor.textPrimary)
@@ -61,7 +61,7 @@ struct TaskDetailView: View {
           }
           if let parent = state.task(task.parentTaskID) {
             NavigationLink(value: parent.id) {
-              Label("Osa tehtävää: \(parent.title)", systemImage: "arrow.turn.left.up")
+              Label("Osa tehtävää: \(state.displayTitle(of: parent))", systemImage: "arrow.turn.left.up")
                 .font(AppTypography.caption.weight(.semibold))
             }
           }
@@ -75,7 +75,7 @@ struct TaskDetailView: View {
           HStack(spacing: AppSpacing.sm) {
             MemberAvatar(member: responsible, size: 44)
             VStack(alignment: .leading, spacing: 2) {
-              Text(responsible?.name ?? "Avoin, kuka tahansa voi ottaa")
+              Text(responsible?.name ?? String(localized: "Avoin, kuka tahansa voi ottaa"))
                 .font(AppTypography.headline)
               if let back = task.temporaryReturn {
                 Text("Väliaikaisesti, palaa \(state.member(back.memberID)?.name ?? "") \(back.day.relativeText())")
@@ -101,9 +101,9 @@ struct TaskDetailView: View {
 
           if task.status == .open {
             if task.responsibleID == nil {
-              PrimaryButton(title: "Ota itselle", systemImage: "hand.raised.fill") { model.take(task.id) }
+              PrimaryButton(title: String(localized: "Ota itselle"), systemImage: "hand.raised.fill") { model.take(task.id) }
             } else if canManage && pending == nil {
-              SecondaryButton(title: "Siirrä vastuu", systemImage: "arrow.left.arrow.right") { isTransferring = true }
+              SecondaryButton(title: String(localized: "Siirrä vastuu"), systemImage: "arrow.left.arrow.right") { isTransferring = true }
             }
             if task.responsibleID != nil && canManage {
               HStack(spacing: AppSpacing.md) {
@@ -121,7 +121,7 @@ struct TaskDetailView: View {
         // Help sub-tasks
         let subtasks = state.subtasks(of: task.id)
         if !subtasks.isEmpty {
-          SectionHeader(title: "Osatehtävät")
+          SectionHeader(title: String(localized: "Osatehtävät"))
           Card {
             ForEach(subtasks) { sub in
               NavigationLink(value: sub.id) { TaskRow(task: sub) }.buttonStyle(.plain)
@@ -130,55 +130,57 @@ struct TaskDetailView: View {
         }
 
         if task.status == .open {
-          PrimaryButton(title: "Merkitse hoidetuksi", systemImage: "checkmark.circle.fill") {
+          PrimaryButton(title: String(localized: "Merkitse hoidetuksi"), systemImage: "checkmark.circle.fill") {
             model.complete(task.id)
             dismiss()
           }
         } else {
-          SecondaryButton(title: task.status == .done ? "Hoidettu. Avaa uudelleen" : "Ohitettu. Palauta", systemImage: "arrow.uturn.backward") {
+          SecondaryButton(title: task.status == .done ? String(localized: "Hoidettu. Avaa uudelleen") : String(localized: "Ohitettu. Palauta"), systemImage: "arrow.uturn.backward") {
             model.reopen(task.id)
           }
         }
 
         // History
-        SectionHeader(title: "Historia")
+        SectionHeader(title: String(localized: "Historia"))
         Card {
           ForEach(state.history(for: .task(task.id))) { entry in
             HistoryRow(entry: entry)
           }
         }
 
-        Button(task.occurrenceKey != nil ? "Ohita tänä vuonna" : "Poista tehtävä", role: .destructive) {
+        Button(task.occurrenceKey != nil ? String(localized: "Ohita tänä vuonna") : String(localized: "Poista tehtävä"), role: .destructive) {
           isConfirmingDelete = true
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, AppSpacing.md)
       }
     }
-    .navigationTitle("")
+    .navigationTitle(Text(verbatim: ""))
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
       Button("Muokkaa") { isEditing = true }
     }
-    .sheet(isPresented: $isEditing) { TaskEditorView(task: task) }
+    .sheet(isPresented: $isEditing) {
+      TaskEditorView(task: task, displayTitle: state.displayTitle(of: task), displayNotes: state.displayNotes(of: task))
+    }
     .sheet(isPresented: $isTransferring) { TransferSheet(subject: .task(task.id)) }
     .sheet(isPresented: $isAskingHelp) { HelpSheet(parent: task) }
     .confirmationDialog("Haluatko varmasti?", isPresented: $isConfirmingDelete, titleVisibility: .visible) {
-      Button(task.occurrenceKey != nil ? "Ohita" : "Poista", role: .destructive) {
+      Button(task.occurrenceKey != nil ? String(localized: "Ohita") : String(localized: "Poista"), role: .destructive) {
         model.delete(task)
         dismiss()
       }
     } message: {
-      Text(task.occurrenceKey != nil ? "Vuosikello ei luo tätä uudelleen tänä vuonna." : "Tehtävä poistuu molemmilta.")
+      Text(task.occurrenceKey != nil ? String(localized: "Vuosikello ei luo tätä uudelleen tänä vuonna.") : String(localized: "Tehtävä poistuu molemmilta."))
     }
   }
 
   private func eventText(_ task: FamilyTask, _ day: Day) -> String {
     guard let minutes = task.eventMinutes else { return day.relativeText() }
-    return day.relativeText() + String(format: " klo %d.%02d", minutes / 60, minutes % 60)
+    return day.relativeText() + " " + String(localized: "klo \(DateText.time(minutes: minutes))")
   }
 
-  private func detailRow(_ icon: String, _ label: String, _ value: String) -> some View {
+  private func detailRow(_ icon: String, _ label: LocalizedStringKey, _ value: String) -> some View {
     HStack(spacing: AppSpacing.sm) {
       Image(systemName: icon)
         .frame(width: 22)
@@ -209,9 +211,9 @@ struct HistoryRow: View {
           .font(AppTypography.body)
           .foregroundColor(AppColor.textPrimary)
         if let note = entry.note, entry.kind != .created {
-          Text("”\(note)”").font(AppTypography.caption).foregroundColor(AppColor.textSecondary)
+          Text(noteText(note)).font(AppTypography.caption).foregroundColor(AppColor.textSecondary)
         }
-        Text(entry.date.formatted(.dateTime.locale(Locale(identifier: "fi_FI")).day().month().hour().minute()))
+        Text(entry.date.formatted(.dateTime.day().month().hour().minute()))
           .font(AppTypography.caption)
           .foregroundColor(AppColor.textSecondary)
       }
@@ -234,22 +236,37 @@ struct HistoryRow: View {
     }
   }
 
+  /// Marker notes are translated; anything a person wrote is quoted as written.
+  private func noteText(_ note: String) -> String {
+    switch note {
+    case HistoryEntry.skippedNote: return String(localized: "Ohitettu")
+    case HistoryEntry.yearClockNote: return String(localized: "Vuosikello")
+    default: return String(localized: "”\(note)”", comment: "A quoted message")
+    }
+  }
+
   private func text(_ state: FamilyState) -> String {
     let actor = state.member(entry.actorID)?.name
-    let from = state.member(entry.fromID)?.name ?? "avoin"
-    let to = state.member(entry.toID)?.name ?? "avoin"
+    let from = state.member(entry.fromID)?.name ?? String(localized: "avoin")
+    let to = state.member(entry.toID)?.name ?? String(localized: "avoin")
     switch entry.kind {
-    case .created: return entry.note == "Vuosikello" ? "Vuosikello loi, vastuu: \(to)" : "\(actor ?? "Joku") loi, vastuu: \(to)"
-    case .transferRequested: return "\(actor ?? "") pyysi: \(from) → \(to)"
-    case .transferred: return "Vastuu siirtyi: \(from) → \(to)"
-    case .transferDeclined: return "\(to) kieltäytyi siirrosta"
-    case .transferCancelled: return "Siirtopyyntö peruttiin"
-    case .returned: return "Väliaikainen siirto päättyi, vastuu palasi: \(to)"
-    case .taken: return "\(to) otti hoitaakseen"
-    case .released: return "\(from) avasi tehtävän kaikille"
-    case .helpRequested: return "\(actor ?? "") pyysi apua: \(entry.note ?? "")"
-    case .completed: return entry.note == "Ohitettu" ? "Ohitettu tänä vuonna" : "\(actor ?? "") kuittasi hoidetuksi"
-    case .reopened: return "\(actor ?? "") avasi uudelleen"
+    case .created:
+      return entry.note == HistoryEntry.yearClockNote
+        ? String(localized: "Vuosikello loi, vastuu: \(to)")
+        : String(localized: "\(actor ?? String(localized: "Joku")) loi, vastuu: \(to)")
+    case .transferRequested: return String(localized: "\(actor ?? "") pyysi: \(from) → \(to)")
+    case .transferred: return String(localized: "Vastuu siirtyi: \(from) → \(to)")
+    case .transferDeclined: return String(localized: "\(to) kieltäytyi siirrosta")
+    case .transferCancelled: return String(localized: "Siirtopyyntö peruttiin")
+    case .returned: return String(localized: "Väliaikainen siirto päättyi, vastuu palasi: \(to)")
+    case .taken: return String(localized: "\(to) otti hoitaakseen")
+    case .released: return String(localized: "\(from) avasi tehtävän kaikille")
+    case .helpRequested: return String(localized: "\(actor ?? "") pyysi apua: \(entry.note ?? "")")
+    case .completed:
+      return entry.note == HistoryEntry.skippedNote
+        ? String(localized: "Ohitettu tänä vuonna")
+        : String(localized: "\(actor ?? "") kuittasi hoidetuksi")
+    case .reopened: return String(localized: "\(actor ?? "") avasi uudelleen")
     }
   }
 }

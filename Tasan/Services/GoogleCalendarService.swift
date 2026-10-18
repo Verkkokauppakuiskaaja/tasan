@@ -25,11 +25,11 @@ final class GoogleCalendarService: NSObject {
 
     var errorDescription: String? {
       switch self {
-      case .notConfigured: return "Google-kalenteria ei ole vielä määritetty tähän versioon (GOOGLE_CLIENT_ID puuttuu)."
-      case .notSignedIn: return "Kirjaudu ensin Google-tilillesi."
-      case .cancelled: return "Kirjautuminen peruttiin."
-      case let .http(code, message): return "Google vastasi virheellä \(code): \(message)"
-      case .invalidResponse: return "Google palautti odottamattoman vastauksen."
+      case .notConfigured: return String(localized: "Google-kalenteria ei ole vielä määritetty tähän versioon (GOOGLE_CLIENT_ID puuttuu).")
+      case .notSignedIn: return String(localized: "Kirjaudu ensin Google-tilillesi.")
+      case .cancelled: return String(localized: "Kirjautuminen peruttiin.")
+      case let .http(code, message): return String(localized: "Google vastasi virheellä \(code): \(message)")
+      case .invalidResponse: return String(localized: "Google palautti odottamattoman vastauksen.")
       }
     }
   }

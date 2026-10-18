@@ -57,7 +57,7 @@ struct ProcessingOverlay: View {
 struct ProcessingOverlay_Previews: PreviewProvider {
   static var previews: some View {
     ProcessingOverlay(
-      message: "Luetaan kuvaa…"
+      message: String(localized: "Luetaan kuvaa…")
     )
     .frame(width: 300, height: 220)
     .padding()

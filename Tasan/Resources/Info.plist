@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>fi</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>Tasan!</string>
 	<key>CFBundleExecutable</key>
@@ -23,6 +23,8 @@
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>fi</string>
+		<string>en</string>
+		<string>sv</string>
 	</array>
 	<key>CFBundleURLTypes</key>
 	<array>

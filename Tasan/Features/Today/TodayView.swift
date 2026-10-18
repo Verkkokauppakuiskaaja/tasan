@@ -11,9 +11,16 @@ struct TodayView: View {
   @State private var isImporting = false
   @State private var isShowingSettings = false
 
-  enum Scope: String, CaseIterable {
-    case mine = "Minun"
-    case all = "Kaikki"
+  enum Scope: CaseIterable {
+    case mine
+    case all
+
+    var title: LocalizedStringKey {
+      switch self {
+      case .mine: return "Minun"
+      case .all: return "Kaikki"
+      }
+    }
   }
 
   var body: some View {
@@ -35,7 +42,7 @@ struct TodayView: View {
           }
 
           Picker("Näytä", selection: $scope) {
-            ForEach(Scope.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+            ForEach(Scope.allCases, id: \.self) { Text($0.title).tag($0) }
           }
           .pickerStyle(.segmented)
 
@@ -59,14 +66,14 @@ struct TodayView: View {
     HStack(spacing: AppSpacing.sm) {
       VStack(alignment: .leading, spacing: 0) {
         Wordmark(fontSize: 30)
-        Text("Hei \(model.me?.name ?? "")! \(Day.today().relativeText().capitalized) \(Day.today().finnishShortString)")
+        Text("Hei \(model.me?.name ?? "")! \(Day.today().relativeText().capitalized) \(DateText.dayMonth(Day.today()))")
           .font(AppTypography.caption)
           .foregroundColor(AppColor.textSecondary)
       }
       Spacer()
-      CircleIconButton(systemName: "camera.viewfinder", accessibilityLabel: "Kuvasta tapahtumaksi") { isImporting = true }
-      CircleIconButton(systemName: "plus", accessibilityLabel: "Uusi tehtävä") { isAddingTask = true }
-      CircleIconButton(systemName: "gearshape", accessibilityLabel: "Asetukset") { isShowingSettings = true }
+      CircleIconButton(systemName: "camera.viewfinder", accessibilityLabel: String(localized: "Kuvasta tapahtumaksi")) { isImporting = true }
+      CircleIconButton(systemName: "plus", accessibilityLabel: String(localized: "Uusi tehtävä")) { isAddingTask = true }
+      CircleIconButton(systemName: "gearshape", accessibilityLabel: String(localized: "Asetukset")) { isShowingSettings = true }
     }
   }
 
@@ -92,16 +99,16 @@ struct TodayView: View {
     if tasks.isEmpty && model.openTasks.isEmpty {
       EmptyState(
         systemImage: "sparkles",
-        title: "Ei mitään juuri nyt",
-        message: "Vuosikello lisää tehtävät ajoissa. Voit myös lisätä tehtävän itse tai kuvasta."
+        title: String(localized: "Ei mitään juuri nyt"),
+        message: String(localized: "Vuosikello lisää tehtävät ajoissa. Voit myös lisätä tehtävän itse tai kuvasta.")
       )
     }
 
-    section("Tänään ja myöhässä", now)
-    section("Seuraavat 7 päivää", week)
+    section(String(localized: "Tänään ja myöhässä"), now)
+    section(String(localized: "Seuraavat 7 päivää"), week)
 
     if !model.openTasks.isEmpty {
-      SectionHeader(title: "Avoimet", subtitle: "Kuka tahansa voi ottaa", count: model.openTasks.count)
+      SectionHeader(title: String(localized: "Avoimet"), subtitle: String(localized: "Kuka tahansa voi ottaa"), count: model.openTasks.count)
       Card {
         ForEach(model.openTasks) { task in
           HStack {
@@ -117,7 +124,7 @@ struct TodayView: View {
       }
     }
 
-    section("Myöhemmin", later)
+    section(String(localized: "Myöhemmin"), later)
   }
 
   @ViewBuilder
@@ -155,7 +162,7 @@ struct TransferRequestCard: View {
       HStack(spacing: AppSpacing.sm) {
         MemberAvatar(member: from, size: 36)
         VStack(alignment: .leading, spacing: 2) {
-          Text("\(from?.name ?? "Perheenjäsen") pyytää sinua ottamaan")
+          Text("\(from?.name ?? String(localized: "Perheenjäsen")) pyytää sinua ottamaan")
             .font(AppTypography.caption)
             .foregroundColor(AppColor.textSecondary)
           Text(state.subjectTitle(request.subject))
@@ -164,19 +171,19 @@ struct TransferRequestCard: View {
         }
       }
       if let message = request.message {
-        Text("”\(message)”")
+        Text("”\(message)”", comment: "A quoted message")
           .font(AppTypography.body)
           .foregroundColor(AppColor.textPrimary)
       }
       if let day = request.returnDay {
-        Pill(text: "Väliaikainen, palaa \(day.relativeText())", systemImage: "arrow.uturn.backward", color: AppColor.detail)
+        Pill(text: String(localized: "Väliaikainen, palaa \(day.relativeText())"), systemImage: "arrow.uturn.backward", color: AppColor.detail)
       }
       if case let .task(id) = request.subject, let task = state.task(id), let time = task.timeText() {
         Text(time).font(AppTypography.caption).foregroundColor(AppColor.textSecondary)
       }
       HStack(spacing: AppSpacing.sm) {
-        PrimaryButton(title: "Hyväksy", systemImage: "checkmark") { model.acceptTransfer(request.id) }
-        SecondaryButton(title: "Kieltäydy") { isDeclining = true }
+        PrimaryButton(title: String(localized: "Hyväksy"), systemImage: "checkmark") { model.acceptTransfer(request.id) }
+        SecondaryButton(title: String(localized: "Kieltäydy")) { isDeclining = true }
       }
     }
     .overlay(
@@ -188,7 +195,7 @@ struct TransferRequestCard: View {
       Button("Kieltäydy", role: .destructive) { model.declineTransfer(request.id, reason: reason) }
       Button("Peru", role: .cancel) {}
     } message: {
-      Text("Vastuu pysyy ennallaan ja \(model.state.member(request.requestedByID)?.name ?? "lähettäjä") saa tiedon.")
+      Text("Vastuu pysyy ennallaan ja \(model.state.member(request.requestedByID)?.name ?? String(localized: "lähettäjä")) saa tiedon.")
     }
   }
 }
@@ -203,14 +210,20 @@ struct OverlapCard: View {
       Label("Päällekkäisyys", systemImage: "exclamationmark.triangle.fill")
         .font(AppTypography.caption.weight(.semibold))
         .foregroundColor(AppColor.detail)
-      Text(state.task(overlap.taskID)?.title ?? "")
+      Text(state.task(overlap.taskID).map(state.displayTitle(of:)) ?? "")
         .font(AppTypography.headline)
-      Text("Sinulla on samaan aikaan \(overlap.conflictingTitle.map { "”\($0)”" } ?? "muuta kalenterissa").")
+      Group {
+        if let conflict = overlap.conflictingTitle {
+          Text("Sinulla on samaan aikaan ”\(conflict)”.")
+        } else {
+          Text("Sinulla on samaan aikaan muuta kalenterissa.")
+        }
+      }
         .font(AppTypography.body)
         .foregroundColor(AppColor.textSecondary)
       if let suggested = state.member(overlap.suggestedMemberID) {
-        SecondaryButton(title: "Ehdota siirtoa: \(suggested.name)", systemImage: "arrow.left.arrow.right") {
-          model.requestTransfer(.task(overlap.taskID), to: suggested.id, message: "Mulla on samaan aikaan muuta, voitko ottaa?", returnDay: nil, direct: false)
+        SecondaryButton(title: String(localized: "Ehdota siirtoa: \(suggested.name)"), systemImage: "arrow.left.arrow.right") {
+          model.requestTransfer(.task(overlap.taskID), to: suggested.id, message: String(localized: "Mulla on samaan aikaan muuta, voitko ottaa?"), returnDay: nil, direct: false)
         }
       }
     }
@@ -230,13 +243,13 @@ struct InviteCard: View {
         .font(AppTypography.body)
         .foregroundColor(AppColor.textSecondary)
         .fixedSize(horizontal: false, vertical: true)
-      PrimaryButton(title: isLoading ? "Valmistellaan…" : "Kutsu", systemImage: "person.badge.plus") {
+      PrimaryButton(title: isLoading ? String(localized: "Valmistellaan…") : String(localized: "Kutsu"), systemImage: "person.badge.plus") {
         isLoading = true
         Task {
           do {
             share = try await model.invitationShare()
           } catch {
-            model.errorMessage = "Kutsua ei voitu luoda: \(error.localizedDescription). Tarkista, että olet kirjautunut iCloudiin."
+            model.errorMessage = String(localized: "Kutsua ei voitu luoda: \(error.localizedDescription). Tarkista, että olet kirjautunut iCloudiin.")
           }
           isLoading = false
         }

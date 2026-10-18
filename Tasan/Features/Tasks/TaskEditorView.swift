@@ -25,13 +25,14 @@ struct TaskEditorView: View {
   @State private var notes: String
   @State private var didSetResponsible = false
 
-  init(task: FamilyTask?) {
+  /// `displayTitle`/`displayNotes`: a year clock task opens in the current language; saving unchanged text keeps the stored Finnish.
+  init(task: FamilyTask?, displayTitle: String? = nil, displayNotes: String? = nil) {
     original = task
     source = task?.source ?? .manual
     let calendar = Calendar.finnish
     let event = task?.eventDay.map { day in task?.eventMinutes.map { day.date(minutes: $0) } ?? day.date(minutes: 12 * 60) }
       ?? calendar.date(byAdding: .day, value: 7, to: Date())!
-    _title = State(initialValue: task?.title ?? "")
+    _title = State(initialValue: displayTitle ?? task?.title ?? "")
     _areaID = State(initialValue: task?.areaID)
     _responsibleID = State(initialValue: task?.responsibleID)
     _subjectID = State(initialValue: task?.subjectMemberID)
@@ -44,7 +45,7 @@ struct TaskEditorView: View {
     _hasCustomReminder = State(initialValue: task?.reminder != nil)
     _reminder = State(initialValue: task?.reminderDate() ?? event)
     _location = State(initialValue: task?.location ?? "")
-    _notes = State(initialValue: task?.notes ?? "")
+    _notes = State(initialValue: displayNotes ?? task?.notes ?? "")
     _didSetResponsible = State(initialValue: task != nil)
   }
 
@@ -63,7 +64,7 @@ struct TaskEditorView: View {
     _hasPrep = State(initialValue: prepLeadDays > 0)
     _prepDate = State(initialValue: Calendar.finnish.date(byAdding: .day, value: -prepLeadDays, to: start)!)
     _location = State(initialValue: imported.location ?? "")
-    let preparation = imported.preparation.map { "Valmistele: \($0)" }
+    let preparation = imported.preparation.map { String(localized: "Valmistele: \($0)") }
     _notes = State(initialValue: [preparation, imported.notes].compactMap { $0 }.joined(separator: "\n"))
   }
 
@@ -77,7 +78,7 @@ struct TaskEditorView: View {
           Picker("Osa-alue", selection: $areaID) {
             Text("Ei osa-aluetta").tag(UUID?.none)
             ForEach(state.areas.filter(\.enabled)) { area in
-              Label(area.name, systemImage: area.kind.symbolName).tag(UUID?.some(area.id))
+              Label(area.displayName, systemImage: area.kind.symbolName).tag(UUID?.some(area.id))
             }
           }
           .onChange(of: areaID) { _, newArea in
@@ -133,10 +134,9 @@ struct TaskEditorView: View {
             .lineLimit(3...8)
         }
       }
-      .environment(\.locale, Locale(identifier: "fi_FI"))
       .scrollContentBackground(.hidden)
       .background(AppColor.background)
-      .navigationTitle(original == nil ? "Uusi tehtävä" : "Muokkaa")
+      .navigationTitle(original == nil ? Text("Uusi tehtävä") : Text("Muokkaa"))
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .cancellationAction) { Button("Peru") { dismiss() } }
@@ -154,13 +154,22 @@ struct TaskEditorView: View {
   }
 
   private var durationText: String {
-    durationMinutes % 60 == 0 ? "\(durationMinutes / 60) h" : "\(durationMinutes / 60) h \(durationMinutes % 60) min"
+    let formatter = DateComponentsFormatter()
+    formatter.unitsStyle = .abbreviated
+    formatter.allowedUnits = [.hour, .minute]
+    return formatter.string(from: TimeInterval(durationMinutes * 60)) ?? "\(durationMinutes) min"
   }
 
   private func save() {
     let calendar = Calendar.finnish
     var task = original ?? FamilyTask(title: "", source: source)
-    task.title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+    let newTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
+    // Unchanged translated text keeps the stored Finnish, so the other phone still shows it in its own language.
+    if let original, newTitle == model.state.displayTitle(of: original) {
+      task.title = original.title
+    } else {
+      task.title = newTitle
+    }
     task.areaID = areaID
     task.responsibleID = responsibleID
     task.subjectMemberID = subjectID
@@ -178,7 +187,11 @@ struct TaskEditorView: View {
     }
     task.prepDay = hasPrep ? Day(date: prepDate, calendar: calendar) : nil
     task.reminder = hasCustomReminder ? reminder : nil
-    task.notes = notes.isEmpty ? nil : notes
+    if let original, notes == (model.state.displayNotes(of: original) ?? "") {
+      task.notes = original.notes
+    } else {
+      task.notes = notes.isEmpty ? nil : notes
+    }
 
     // Changing the responsible person here is a transfer; that goes through approval.
     if let original, original.responsibleID != task.responsibleID, let receiver = task.responsibleID, receiver != model.meID {

@@ -32,8 +32,8 @@ final class NotificationService: NSObject {
   override init() {
     super.init()
     center.delegate = self
-    let accept = UNNotificationAction(identifier: Self.acceptAction, title: "Hyväksy", options: [.authenticationRequired])
-    let decline = UNNotificationAction(identifier: Self.declineAction, title: "Kieltäydy", options: [.destructive])
+    let accept = UNNotificationAction(identifier: Self.acceptAction, title: String(localized: "Hyväksy"), options: [.authenticationRequired])
+    let decline = UNNotificationAction(identifier: Self.declineAction, title: String(localized: "Kieltäydy"), options: [.destructive])
     center.setNotificationCategories([
       UNNotificationCategory(identifier: Self.transferCategory, actions: [accept, decline], intentIdentifiers: [])
     ])
@@ -65,7 +65,7 @@ final class NotificationService: NSObject {
 
     for (task, date) in upcoming {
       let content = UNMutableNotificationContent()
-      content.title = task.title
+      content.title = state.displayTitle(of: task)
       content.body = Self.reminderBody(task)
       content.sound = .default
       content.userInfo = ["taskID": task.id.uuidString]
@@ -80,11 +80,11 @@ final class NotificationService: NSObject {
   }
 
   private static func reminderBody(_ task: FamilyTask) -> String {
-    guard let event = task.eventDay else { return "Muistutus Tasan!-sovelluksesta" }
+    guard let event = task.eventDay else { return String(localized: "Muistutus Tasan!-sovelluksesta") }
     if let prep = task.prepDay, prep != event {
-      return "Valmistelu tänään, tapahtuma \(event.finnishShortString)"
+      return String(localized: "Valmistelu tänään, tapahtuma \(DateText.dayMonth(event))")
     }
-    return "Tapahtuma \(event.finnishShortString)"
+    return String(localized: "Tapahtuma \(DateText.dayMonth(event))")
   }
 
   // MARK: Family meeting
@@ -96,8 +96,8 @@ final class NotificationService: NSObject {
 
     if family.weeklyMeeting.enabled {
       let content = UNMutableNotificationContent()
-      content.title = "Viikkopalaveri"
-      content.body = "Käykää yhdessä läpi seuraavat 7 päivää. Noin 15 minuuttia."
+      content.title = String(localized: "Viikkopalaveri")
+      content.body = String(localized: "Käykää yhdessä läpi seuraavat 7 päivää. Noin 15 minuuttia.")
       content.sound = .default
       content.userInfo = ["meeting": "weekly"]
       var parts = DateComponents()
@@ -118,8 +118,8 @@ final class NotificationService: NSObject {
         target = FinnishCalendar.nthWeekday(-1, weekday: 7, month: next.1, year: next.0) ?? today
       }
       let content = UNMutableNotificationContent()
-      content.title = "Kuukausipalaveri"
-      content.body = "Isommat hankinnat, juhlat, lomat ja vuosikellon tulevat asiat. Noin 30 minuuttia."
+      content.title = String(localized: "Kuukausipalaveri")
+      content.body = String(localized: "Isommat hankinnat, juhlat, lomat ja vuosikellon tulevat asiat. Noin 30 minuuttia.")
       content.sound = .default
       content.userInfo = ["meeting": "monthly"]
       let date = target.date(minutes: family.weeklyMeeting.minutes)
@@ -145,23 +145,24 @@ final class NotificationService: NSObject {
       guard request.modifiedAt > Date().addingTimeInterval(-86_400) else { continue }
 
       let title = state.subjectTitle(request.subject)
-      let from = state.member(request.requestedByID)?.name ?? "Perheenjäsen"
-      let to = state.member(request.toID)?.name ?? "Perheenjäsen"
+      let from = state.member(request.requestedByID)?.name ?? String(localized: "Perheenjäsen")
+      let to = state.member(request.toID)?.name ?? String(localized: "Perheenjäsen")
       let content = UNMutableNotificationContent()
       content.sound = .default
       content.userInfo = ["transferID": request.id.uuidString]
 
       switch request.status {
       case .pending where request.toID == me && request.requestedByID != me:
-        content.title = "\(from) pyytää: \(title)"
-        content.body = request.message ?? (request.returnDay.map { "Väliaikainen siirto \($0.finnishShortString) asti" } ?? "Voitko ottaa tämän vastuun?")
+        content.title = String(localized: "\(from) pyytää: \(title)")
+        content.body = request.message
+          ?? (request.returnDay.map { String(localized: "Väliaikainen siirto \(DateText.dayMonth($0)) asti") } ?? String(localized: "Voitko ottaa tämän vastuun?"))
         content.categoryIdentifier = Self.transferCategory
       case .accepted where request.requestedByID == me && request.toID != me:
-        content.title = "\(to) otti vastuun"
+        content.title = String(localized: "\(to) otti vastuun")
         content.body = title
       case .declined where request.requestedByID == me:
-        content.title = "\(to) ei voi ottaa"
-        content.body = "\(title) pysyy ennallaan."
+        content.title = String(localized: "\(to) ei voi ottaa")
+        content.body = String(localized: "\(title) pysyy ennallaan.")
       default:
         continue
       }

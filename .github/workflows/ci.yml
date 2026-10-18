@@ -44,3 +44,13 @@ jobs:
             -destination 'generic/platform=iOS Simulator' \
             CODE_SIGNING_ALLOWED=NO \
             -quiet
+      - name: Check English and Swedish translations
+        run: |
+          xcodebuild -exportLocalizations \
+            -project Tasan.xcodeproj \
+            -localizationPath build/localizations \
+            -exportLanguage en \
+            -exportLanguage sv \
+            -sdk iphonesimulator \
+            CODE_SIGNING_ALLOWED=NO
+          python3 scripts/check_translations.py build/localizations

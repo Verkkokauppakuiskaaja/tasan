@@ -8,6 +8,8 @@ struct DeviceContext: Codable, Equatable {
   let preferredLanguage: String
   let measurementSystem: String
   let referenceDate: String
+  /// The language the app is shown in ("fi", "en" or "sv"); the service writes the preparation hint in it.
+  let appLanguage: String
 
   static var current: DeviceContext {
     let locale = Locale.current
@@ -43,7 +45,9 @@ struct DeviceContext: Codable, Equatable {
       referenceDate:
         formatter.string(
           from: Date()
-        )
+        ),
+      appLanguage:
+        AppLanguage.current
     )
   }
 

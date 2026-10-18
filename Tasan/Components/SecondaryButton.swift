@@ -54,7 +54,7 @@ struct SecondaryButton: View {
 
 struct SecondaryButton_Previews: PreviewProvider {
   static var previews: some View {
-    SecondaryButton(title: "Takaisin", systemImage: "chevron.left", action: {})
+    SecondaryButton(title: String(localized: "Takaisin"), systemImage: "chevron.left", action: {})
       .padding()
       .background(AppColor.background)
       .previewLayout(.sizeThatFits)

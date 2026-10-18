@@ -142,7 +142,8 @@ public enum AreaKind: String, Codable, CaseIterable, Sendable {
   case parties
   case holidays
 
-  public var title: String {
+  /// The Finnish name, stored as an area's default name. `title` gives it in the current language.
+  public var finnishTitle: String {
     switch self {
     case .clothing: return "Vaatteet ja varusteet"
     case .school: return "Koulu ja päiväkoti"
@@ -203,7 +204,7 @@ public struct Area: FamilyRecord {
   ) {
     self.id = id
     self.kind = kind
-    self.name = name ?? kind.title
+    self.name = name ?? kind.finnishTitle
     self.ownerID = ownerID
     self.subjectMemberID = subjectMemberID
     self.enabled = enabled
@@ -466,6 +467,10 @@ public enum HistoryKind: String, Codable, Sendable {
 
 public struct HistoryEntry: FamilyRecord {
   public static let recordType = "HistoryEntry"
+
+  /// Notes that mark an entry rather than quote someone. Stored in Finnish on every phone; the app translates them.
+  public static let yearClockNote = "Vuosikello"
+  public static let skippedNote = "Ohitettu"
 
   public var id: UUID
   public var subject: TransferSubject

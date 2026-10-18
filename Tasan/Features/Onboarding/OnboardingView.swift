@@ -60,7 +60,7 @@ struct OnboardingView: View {
     .frame(maxWidth: .infinity)
   }
 
-  private func feature(_ icon: String, _ title: String, _ text: String, _ color: Color) -> some View {
+  private func feature(_ icon: String, _ title: LocalizedStringKey, _ text: LocalizedStringKey, _ color: Color) -> some View {
     HStack(spacing: AppSpacing.md) {
       Image(systemName: icon)
         .font(.system(size: 20, weight: .semibold))
@@ -79,7 +79,7 @@ struct OnboardingView: View {
 
   private var you: some View {
     VStack(alignment: .leading, spacing: AppSpacing.lg) {
-      TitleSection(title: "Perhe ja sinä", subtitle: "Sinusta tulee perheen ylläpitäjä. Toisen aikuisen kutsut seuraavaksi.")
+      TitleSection(title: String(localized: "Perhe ja sinä"), subtitle: String(localized: "Sinusta tulee perheen ylläpitäjä. Toisen aikuisen kutsut seuraavaksi."))
       Card {
         LabeledField("Perheen nimi", text: $familyName, prompt: "esim. Virtaset")
         LabeledField("Sinun nimesi", text: $myName, prompt: "esim. Anna")
@@ -91,7 +91,7 @@ struct OnboardingView: View {
 
   private var childrenStep: some View {
     VStack(alignment: .leading, spacing: AppSpacing.lg) {
-      TitleSection(title: "Lapset", subtitle: "Syntymäpäivistä vuosikello tekee synttäritehtävät. Koot, koulun ja harrastukset voit lisätä myöhemmin.")
+      TitleSection(title: String(localized: "Lapset"), subtitle: String(localized: "Syntymäpäivistä vuosikello tekee synttäritehtävät. Koot, koulun ja harrastukset voit lisätä myöhemmin."))
       ForEach(children.indices, id: \.self) { index in
         Card {
           LabeledField("Nimi", text: $children[index].name, prompt: "esim. Liisa")
@@ -103,10 +103,9 @@ struct OnboardingView: View {
             ),
             displayedComponents: .date
           )
-          .environment(\.locale, Locale(identifier: "fi_FI"))
         }
       }
-      SecondaryButton(title: "Lisää lapsi", systemImage: "plus") {
+      SecondaryButton(title: String(localized: "Lisää lapsi"), systemImage: "plus") {
         children.append(AppModel.NewChild(name: "", birthday: nil))
       }
     }
@@ -114,7 +113,7 @@ struct OnboardingView: View {
 
   private var areasStep: some View {
     VStack(alignment: .leading, spacing: AppSpacing.lg) {
-      TitleSection(title: "Osa-alueet", subtitle: "Valitse, mistä vuosikello muistuttaa. Mallit voi muokata myöhemmin.")
+      TitleSection(title: String(localized: "Osa-alueet"), subtitle: String(localized: "Valitse, mistä vuosikello muistuttaa. Mallit voi muokata myöhemmin."))
       ForEach(AreaKind.allCases, id: \.self) { kind in
         Button {
           if areas.contains(kind) { areas.remove(kind) } else { areas.insert(kind) }
@@ -126,7 +125,7 @@ struct OnboardingView: View {
               .background(Circle().fill(kind.color.opacity(0.12)))
             VStack(alignment: .leading, spacing: 2) {
               Text(kind.title).font(AppTypography.headline).foregroundColor(AppColor.textPrimary)
-              Text(BuiltInTemplates.all().filter { $0.areaKind == kind }.prefix(3).map(\.title).joined(separator: ", "))
+              Text(BuiltInTemplates.all().filter { $0.areaKind == kind }.prefix(3).map(\.displayTitle).joined(separator: ", "))
                 .font(AppTypography.caption)
                 .foregroundColor(AppColor.textSecondary)
                 .lineLimit(2)
@@ -148,7 +147,7 @@ struct OnboardingView: View {
 
   private var footer: some View {
     VStack(spacing: AppSpacing.sm) {
-      PrimaryButton(title: step == .areas ? "Luo perhe" : "Jatka", systemImage: step == .areas ? "checkmark" : nil) {
+      PrimaryButton(title: step == .areas ? String(localized: "Luo perhe") : String(localized: "Jatka"), systemImage: step == .areas ? "checkmark" : nil) {
         advance()
       }
       .disabled(!canAdvance || isCreating)
@@ -186,12 +185,12 @@ struct OnboardingView: View {
 
 /// Text field with a small caption above it, as in CalendropAI's forms.
 struct LabeledField: View {
-  let label: String
+  let label: LocalizedStringKey
   @Binding var text: String
-  var prompt: String = ""
+  var prompt: LocalizedStringKey?
   var axis: Axis = .horizontal
 
-  init(_ label: String, text: Binding<String>, prompt: String = "", axis: Axis = .horizontal) {
+  init(_ label: LocalizedStringKey, text: Binding<String>, prompt: LocalizedStringKey? = nil, axis: Axis = .horizontal) {
     self.label = label
     self._text = text
     self.prompt = prompt
@@ -203,7 +202,8 @@ struct LabeledField: View {
       Text(label)
         .font(AppTypography.caption)
         .foregroundColor(AppColor.textSecondary)
-      TextField(prompt, text: $text, axis: axis)
+      // An empty verbatim prompt keeps the caption from repeating as a placeholder; the label stays for VoiceOver.
+      TextField(text: $text, prompt: prompt.map { Text($0) } ?? Text(verbatim: ""), axis: axis) { Text(label) }
         .font(AppTypography.body)
         .padding(AppSpacing.sm)
         .background(RoundedRectangle(cornerRadius: AppRadius.small, style: .continuous).fill(AppColor.background))
@@ -226,7 +226,7 @@ struct ColorPickerRow: View {
             .overlay(Circle().stroke(AppColor.textPrimary, lineWidth: selection == hex ? 3 : 0).padding(-3))
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("Väri \(hex)")
+        .accessibilityLabel(Text("Väri \(hex)"))
       }
     }
   }

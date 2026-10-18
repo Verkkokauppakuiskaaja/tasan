@@ -6,7 +6,7 @@ export const SCHEMA_VERSION =
   "2.0.0";
 
 export const PROMPT_VERSION =
-  "tasan-1.0.0";
+  "tasan-1.1.0";
 
 /*
  * Tasan!'s five family areas, plus "other" for events that fit
@@ -187,7 +187,7 @@ MULTIPLE EVENTS
 
 SOURCE LANGUAGE
 - Detect the primary language of each actual event from the OCR text.
-- Preserve the original event language in all human-readable output fields.
+- Preserve the original event language in all human-readable output fields, except preparation (see FAMILY FIELDS).
 - Do not translate events into English.
 - Do not translate events into the device language.
 - If separate event candidates use different languages, preserve each candidate's own source language.
@@ -299,7 +299,10 @@ FAMILY FIELDS
 - preparation:
   what the family must do or bring beforehand, only when the source says so.
   Examples: bring gym clothes, pack a lunch, buy a present, RSVP by a date, pay a fee, sign a form, dress up.
-  One short sentence or a short comma-separated list, in the event's source language.
+  One short sentence or a short comma-separated list.
+  Write it in deviceContext.appLanguage when it is given ("fi" Finnish, "en" English, "sv" Swedish), because it is an instruction to the family in the language they use the app in.
+  Keep names, dates and amounts from the source as written.
+  When deviceContext.appLanguage is missing, write it in the event's source language.
   Include a deadline when the source gives one.
   Use null when the source names nothing to prepare.
   Do not repeat this in notes.

@@ -12,14 +12,14 @@ public enum ResponsibilityError: Error, Equatable, LocalizedError {
 
   public var errorDescription: String? {
     switch self {
-    case .notFound: return "Asiaa ei löytynyt."
-    case .notAllowed: return "Vain vastuuhenkilö tai ylläpitäjä voi siirtää vastuun."
-    case .receiverCannotTakeResponsibility: return "Tämä jäsen ei voi ottaa vastuita."
-    case .alreadyResponsible: return "Hän on jo vastuussa tästä."
-    case .alreadyPending: return "Tälle on jo avoin siirtopyyntö."
-    case .notPending: return "Pyyntöön on jo vastattu."
-    case .notReceiver: return "Vain pyynnön vastaanottaja voi vastata siihen."
-    case .returnDayInPast: return "Paluupäivän pitää olla tulevaisuudessa."
+    case .notFound: return CoreText.text("Asiaa ei löytynyt.")
+    case .notAllowed: return CoreText.text("Vain vastuuhenkilö tai ylläpitäjä voi siirtää vastuun.")
+    case .receiverCannotTakeResponsibility: return CoreText.text("Tämä jäsen ei voi ottaa vastuita.")
+    case .alreadyResponsible: return CoreText.text("Hän on jo vastuussa tästä.")
+    case .alreadyPending: return CoreText.text("Tälle on jo avoin siirtopyyntö.")
+    case .notPending: return CoreText.text("Pyyntöön on jo vastattu.")
+    case .notReceiver: return CoreText.text("Vain pyynnön vastaanottaja voi vastata siihen.")
+    case .returnDayInPast: return CoreText.text("Paluupäivän pitää olla tulevaisuudessa.")
     }
   }
 }
@@ -46,8 +46,8 @@ public extension FamilyState {
 
   func subjectTitle(_ subject: TransferSubject) -> String {
     switch subject {
-    case let .task(id): return task(id)?.title ?? "Tehtävä"
-    case let .area(id): return area(id)?.name ?? "Osa-alue"
+    case let .task(id): return task(id).map(displayTitle(of:)) ?? CoreText.text("Tehtävä")
+    case let .area(id): return area(id)?.displayName ?? CoreText.text("Osa-alue")
     }
   }
 
@@ -238,7 +238,7 @@ public extension FamilyState {
     guard var task = task(taskID) else { throw ResponsibilityError.notFound }
     task.status = .skipped
     save(task, now: now)
-    save(HistoryEntry(subject: .task(taskID), kind: .completed, actorID: actorID, note: "Ohitettu", date: now), now: now)
+    save(HistoryEntry(subject: .task(taskID), kind: .completed, actorID: actorID, note: HistoryEntry.skippedNote, date: now), now: now)
   }
 
   // MARK: Temporary transfers
@@ -313,7 +313,7 @@ public extension FamilyState {
       for var task in tasks where task.areaID == id && task.status == .open && task.responsibleID == from && from != nil {
         task.responsibleID = to
         save(task, now: now)
-        save(HistoryEntry(subject: .task(task.id), kind: .transferred, actorID: actorID, fromID: from, toID: to, note: "Osa-alue \(area.name) siirtyi", date: now), now: now)
+        save(HistoryEntry(subject: .task(task.id), kind: .transferred, actorID: actorID, fromID: from, toID: to, note: CoreText.format("Osa-alue %@ siirtyi", area.displayName), date: now), now: now)
       }
     }
     save(HistoryEntry(subject: subject, kind: .transferred, actorID: actorID, fromID: from, toID: to, note: note, date: now), now: now)

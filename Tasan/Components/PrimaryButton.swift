@@ -48,8 +48,8 @@ struct PrimaryButton: View {
 struct PrimaryButton_Previews: PreviewProvider {
   static var previews: some View {
     VStack(spacing: AppSpacing.md) {
-      PrimaryButton(title: "Tallenna", systemImage: "checkmark", action: {})
-      PrimaryButton(title: "Tallenna", systemImage: "checkmark", action: {})
+      PrimaryButton(title: String(localized: "Tallenna"), systemImage: "checkmark", action: {})
+      PrimaryButton(title: String(localized: "Tallenna"), systemImage: "checkmark", action: {})
         .disabled(true)
     }
     .padding()

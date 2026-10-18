@@ -14,18 +14,25 @@ struct YearClockView: View {
   @State private var editing: YearTemplate?
   @State private var isAdding = false
 
-  enum Mode: String, CaseIterable {
-    case months = "Kuukaudet"
-    case templates = "Mallit"
+  enum Mode: CaseIterable {
+    case months
+    case templates
+
+    var title: LocalizedStringKey {
+      switch self {
+      case .months: return "Kuukaudet"
+      case .templates: return "Mallit"
+      }
+    }
   }
 
   var body: some View {
     NavigationStack {
       Screen {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
-          TitleSection(title: "Vuosikello", subtitle: "Tehtävät syntyvät malleista ennen kuin kukaan muistaa niitä.")
+          TitleSection(title: String(localized: "Vuosikello"), subtitle: String(localized: "Tehtävät syntyvät malleista ennen kuin kukaan muistaa niitä."))
           Picker("Näkymä", selection: $mode) {
-            ForEach(Mode.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+            ForEach(Mode.allCases, id: \.self) { Text($0.title).tag($0) }
           }
           .pickerStyle(.segmented)
 
@@ -65,7 +72,7 @@ struct YearClockView: View {
                 year = y
                 month = m
               } label: {
-                Text(FinnishCalendar.monthNames[m - 1])
+                Text(DateText.monthName(m))
                   .font(AppTypography.bodyMedium)
                   .padding(.horizontal, AppSpacing.md)
                   .padding(.vertical, AppSpacing.xs)
@@ -81,7 +88,7 @@ struct YearClockView: View {
       }
 
       if occurrences.isEmpty {
-        EmptyState(systemImage: "leaf", title: "Hiljainen kuukausi", message: "Tälle kuukaudelle ei ole malleja. Lisää oma Mallit-välilehdeltä.")
+        EmptyState(systemImage: "leaf", title: String(localized: "Hiljainen kuukausi"), message: String(localized: "Tälle kuukaudelle ei ole malleja. Lisää oma Mallit-välilehdeltä."))
       }
 
       ForEach(AreaKind.allCases, id: \.self) { kind in
@@ -99,12 +106,12 @@ struct YearClockView: View {
   }
 
   private func occurrenceRow(_ occurrence: YearClock.Occurrence, task: FamilyTask?, state: FamilyState) -> some View {
-    let title = occurrence.template.title + (state.member(occurrence.memberID).map { ": \($0.name)" } ?? "")
+    let title = occurrence.displayTitle(in: state)
     let area = YearClock.area(for: occurrence.template.areaKind, subject: occurrence.memberID, in: state)
     return HStack(spacing: AppSpacing.sm) {
       VStack(alignment: .center, spacing: 0) {
-        Text("\(occurrence.eventDay.day)").font(AppTypography.headline)
-        Text(FinnishCalendar.weekdayShortNames[occurrence.eventDay.isoWeekday() - 1]).font(AppTypography.caption)
+        Text(verbatim: "\(occurrence.eventDay.day)").font(AppTypography.headline)
+        Text(DateText.weekdayShortName(occurrence.eventDay.isoWeekday())).font(AppTypography.caption)
       }
       .frame(width: 36)
       .foregroundColor(occurrence.template.areaKind.color)
@@ -139,13 +146,20 @@ struct YearClockView: View {
 
   // MARK: Templates
 
+  private func templateSummary(_ template: YearTemplate) -> String {
+    var parts = [template.rule.localizedDescription, String(localized: "valmistelu \(template.leadDays) pv")]
+    if template.scope == .perChild { parts.append(String(localized: "jokaiselle lapselle")) }
+    return parts.joined(separator: " · ")
+  }
+
   private var templates: some View {
     let state = model.state
     return VStack(alignment: .leading, spacing: AppSpacing.md) {
       ForEach(AreaKind.allCases, id: \.self) { kind in
         let area = state.areas.first { $0.kind == kind && $0.subjectMemberID == nil }
-        let items = state.templates.filter { $0.areaKind == kind }.sorted { $0.title < $1.title }
-        SectionHeader(title: kind.title, subtitle: area?.enabled == false ? "Pois käytöstä" : nil)
+        let items = state.templates.filter { $0.areaKind == kind }
+          .sorted { $0.displayTitle.localizedStandardCompare($1.displayTitle) == .orderedAscending }
+        SectionHeader(title: kind.title, subtitle: area?.enabled == false ? String(localized: "Pois käytöstä") : nil)
         Card {
           if let area {
             Toggle("Osa-alue käytössä", isOn: Binding(get: { area.enabled }, set: { var a = area; a.enabled = $0; model.save(a) }))
@@ -158,24 +172,24 @@ struct YearClockView: View {
                 editing = template
               } label: {
                 VStack(alignment: .leading, spacing: 2) {
-                  Text(template.title).font(AppTypography.body).foregroundColor(AppColor.textPrimary)
-                  Text("\(template.rule.finnishDescription) · valmistelu \(template.leadDays) pv\(template.scope == .perChild ? " · jokaiselle lapselle" : "")")
+                  Text(template.displayTitle).font(AppTypography.body).foregroundColor(AppColor.textPrimary)
+                  Text(templateSummary(template))
                     .font(AppTypography.caption)
                     .foregroundColor(AppColor.textSecondary)
                 }
               }
               .buttonStyle(.plain)
               Spacer()
-              Toggle("", isOn: Binding(get: { template.enabled }, set: { var t = template; t.enabled = $0; model.save(t); model.refreshYearClock() }))
+              Toggle(template.displayTitle, isOn: Binding(get: { template.enabled }, set: { var t = template; t.enabled = $0; model.save(t); model.refreshYearClock() }))
                 .labelsHidden()
             }
           }
         }
       }
-      SecondaryButton(title: "Lisää oma malli", systemImage: "plus") { isAdding = true }
+      SecondaryButton(title: String(localized: "Lisää oma malli"), systemImage: "plus") { isAdding = true }
 
       if let family = state.family {
-        SectionHeader(title: "Koulun lomat")
+        SectionHeader(title: String(localized: "Koulun lomat"))
         Card {
           Stepper(
             "Hiihtoloma viikolla \(family.winterHolidayWeek)",
@@ -205,20 +219,43 @@ struct TemplateEditorView: View {
   @State private var week: Int
   @State private var isConfirmingDelete = false
   let isNew: Bool
+  private let original: YearTemplate
 
-  enum RuleKind: String, CaseIterable {
-    case fixed = "Päivämäärä"
-    case nthWeekday = "Viikonpäivä kuukaudessa"
-    case isoWeek = "Viikko"
-    case easter = "Pääsiäisestä"
-    case birthday = "Syntymäpäivästä"
-    case winterHoliday = "Hiihtoloma"
-    case midsummerEve = "Juhannusaatto"
+  enum RuleKind: CaseIterable {
+    case fixed
+    case nthWeekday
+    case isoWeek
+    case easter
+    case birthday
+    case winterHoliday
+    case midsummerEve
+
+    var title: LocalizedStringKey {
+      switch self {
+      case .fixed: return "Päivämäärä"
+      case .nthWeekday: return "Viikonpäivä kuukaudessa"
+      case .isoWeek: return "Viikko"
+      case .easter: return "Pääsiäisestä"
+      case .birthday: return "Syntymäpäivästä"
+      case .winterHoliday: return "Hiihtoloma"
+      case .midsummerEve: return "Juhannusaatto"
+      }
+    }
   }
+
+  /// The text of a built-in template, as shown in the current language, so an unchanged save keeps the stored Finnish.
+  private let shownTitle: String
+  private let shownNotes: String?
 
   init(template: YearTemplate, isNew: Bool) {
     self.isNew = isNew
-    _template = State(initialValue: template)
+    shownTitle = template.displayTitle
+    shownNotes = template.displayNotes
+    var shown = template
+    shown.title = template.displayTitle
+    shown.notes = template.displayNotes
+    _template = State(initialValue: shown)
+    original = template
     var kind = RuleKind.fixed, month = 1, day = 1, weekday = 7, nth = 1, offset = 0, week = 42
     switch template.rule {
     case let .fixed(m, d): kind = .fixed; month = m; day = d
@@ -250,7 +287,7 @@ struct TemplateEditorView: View {
         }
         Section("Milloin") {
           Picker("Sääntö", selection: $ruleKind) {
-            ForEach(RuleKind.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+            ForEach(RuleKind.allCases, id: \.self) { Text($0.title).tag($0) }
           }
           switch ruleKind {
           case .fixed:
@@ -260,7 +297,7 @@ struct TemplateEditorView: View {
             Picker("Kuukausi", selection: $month) { monthOptions }
             Picker("Viikonpäivä", selection: $weekday) { weekdayOptions }
             Picker("Kuinka mones", selection: $nth) {
-              ForEach(1...4, id: \.self) { Text("\($0).").tag($0) }
+              ForEach(1...4, id: \.self) { Text(DateText.ordinal($0)).tag($0) }
               Text("Viimeinen").tag(-1)
             }
           case .isoWeek:
@@ -286,12 +323,14 @@ struct TemplateEditorView: View {
           }
         }
       }
-      .navigationTitle(isNew ? "Uusi malli" : "Muokkaa mallia")
+      .navigationTitle(isNew ? Text("Uusi malli") : Text("Muokkaa mallia"))
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .cancellationAction) { Button("Peru") { dismiss() } }
         ToolbarItem(placement: .confirmationAction) {
           Button("Tallenna") {
+            if template.title == shownTitle { template.title = original.title }
+            if template.notes == shownNotes { template.notes = original.notes }
             template.rule = rule
             if template.rule.isPerMember { template.scope = .perChild }
             model.save(template)
@@ -325,16 +364,14 @@ struct TemplateEditorView: View {
   }
 
   private var offsetText: String {
-    if offset == 0 { return ruleKind == .easter ? "Pääsiäispäivä" : "Syntymäpäivä" }
-    if offset < 0 { return "\(-offset) pv ennen \(ruleKind == .easter ? "pääsiäistä" : "syntymäpäivää")" }
-    return "\(offset) pv \(ruleKind == .easter ? "pääsiäisen" : "syntymäpäivän") jälkeen"
+    (ruleKind == .easter ? YearRule.easter(offset: offset) : YearRule.birthday(offset: offset)).localizedDescription
   }
 
   private var monthOptions: some View {
-    ForEach(1...12, id: \.self) { Text(FinnishCalendar.monthNames[$0 - 1]).tag($0) }
+    ForEach(1...12, id: \.self) { Text(DateText.monthName($0)).tag($0) }
   }
 
   private var weekdayOptions: some View {
-    ForEach(1...7, id: \.self) { Text(FinnishCalendar.weekdayNames[$0 - 1]).tag($0) }
+    ForEach(1...7, id: \.self) { Text(DateText.weekdayName($0)).tag($0) }
   }
 }

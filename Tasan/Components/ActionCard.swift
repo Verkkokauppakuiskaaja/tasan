@@ -65,16 +65,16 @@ struct ActionCard_Previews: PreviewProvider {
   static var previews: some View {
     VStack(spacing: AppSpacing.md) {
       ActionCard(
-        title: "Ota kuva",
-        subtitle: "Kuvaa tiedote tai kutsu",
+        title: String(localized: "Ota kuva"),
+        subtitle: String(localized: "Kuvaa tiedote tai kutsu"),
         icon: "camera.fill",
         color: AppColor.primary,
         action: {}
       )
 
       ActionCard(
-        title: "Valitse kuva",
-        subtitle: "Valitse kuvakaappaus tai kuva",
+        title: String(localized: "Valitse kuva"),
+        subtitle: String(localized: "Valitse kuvakaappaus tai kuva"),
         icon: "photo.on.rectangle.angled",
         color: AppColor.detail,
         action: {}

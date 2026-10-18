@@ -22,10 +22,10 @@ struct MeetingView: View {
       Screen {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
           TitleSection(
-            title: kind == .weekly ? "Viikkopalaveri" : "Kuukausipalaveri",
+            title: kind == .weekly ? String(localized: "Viikkopalaveri") : String(localized: "Kuukausipalaveri"),
             subtitle: kind == .weekly
-              ? "Seuraavat 7 päivää, noin 15 minuuttia"
-              : "Seuraavat 6 viikkoa ja vuosikellon tulevat asiat, noin 30 minuuttia"
+              ? String(localized: "Seuraavat 7 päivää, noin 15 minuuttia")
+              : String(localized: "Seuraavat 6 viikkoa ja vuosikellon tulevat asiat, noin 30 minuuttia")
           )
 
           Picker("Palaveri", selection: $kind) {
@@ -35,7 +35,7 @@ struct MeetingView: View {
           .pickerStyle(.segmented)
 
           if log == nil {
-            PrimaryButton(title: "Aloita palaveri", systemImage: "play.fill") {
+            PrimaryButton(title: String(localized: "Aloita palaveri"), systemImage: "play.fill") {
               log = MeetingChangeLog(startedAt: Date())
             }
           } else {
@@ -45,24 +45,30 @@ struct MeetingView: View {
           }
 
           if let previous = agenda.previous, !previous.agreedChanges.isEmpty {
-            SectionHeader(title: "Viimeksi sovittiin", subtitle: previous.date.formatted(.dateTime.locale(Locale(identifier: "fi_FI")).day().month()))
+            SectionHeader(title: String(localized: "Viimeksi sovittiin"), subtitle: previous.date.formatted(.dateTime.day().month()))
             Card {
-              ForEach(previous.agreedChanges, id: \.self) { Text("• \($0)").font(AppTypography.body) }
+              ForEach(previous.agreedChanges, id: \.self) { Text(verbatim: "• \($0)").font(AppTypography.body) }
             }
           }
 
           // Overlaps and pending requests first: they need a decision.
           if !agenda.overlaps.isEmpty {
-            SectionHeader(title: "Päällekkäisyydet", count: agenda.overlaps.count)
+            SectionHeader(title: String(localized: "Päällekkäisyydet"), count: agenda.overlaps.count)
             ForEach(agenda.overlaps) { overlap in
               Card {
-                Text(state.task(overlap.taskID)?.title ?? "").font(AppTypography.headline)
-                Text("\(state.member(overlap.memberID)?.name ?? "") on silloin varattu\(overlap.conflictingTitle.map { ": \($0)" } ?? "").")
+                Text(state.task(overlap.taskID).map(state.displayTitle(of:)) ?? "").font(AppTypography.headline)
+                Group {
+                  if let conflict = overlap.conflictingTitle {
+                    Text("\(state.member(overlap.memberID)?.name ?? "") on silloin varattu: \(conflict).")
+                  } else {
+                    Text("\(state.member(overlap.memberID)?.name ?? "") on silloin varattu.")
+                  }
+                }
                   .font(AppTypography.body)
                   .foregroundColor(AppColor.textSecondary)
                 if let suggested = state.member(overlap.suggestedMemberID) {
-                  SecondaryButton(title: "Siirrä: \(suggested.name)", systemImage: "arrow.left.arrow.right") {
-                    model.requestTransfer(.task(overlap.taskID), to: suggested.id, message: "Sovittu palaverissa", returnDay: nil, direct: state.mayTransferDirectly(actorID: model.meID ?? UUID()))
+                  SecondaryButton(title: String(localized: "Siirrä: \(suggested.name)"), systemImage: "arrow.left.arrow.right") {
+                    model.requestTransfer(.task(overlap.taskID), to: suggested.id, message: String(localized: "Sovittu palaverissa"), returnDay: nil, direct: state.mayTransferDirectly(actorID: model.meID ?? UUID()))
                   }
                 }
               }
@@ -70,13 +76,13 @@ struct MeetingView: View {
           }
 
           if !agenda.pendingTransfers.isEmpty {
-            SectionHeader(title: "Odottavat siirrot", count: agenda.pendingTransfers.count)
+            SectionHeader(title: String(localized: "Odottavat siirrot"), count: agenda.pendingTransfers.count)
             Card {
               ForEach(agenda.pendingTransfers) { request in
                 HStack {
                   VStack(alignment: .leading) {
                     Text(state.subjectTitle(request.subject)).font(AppTypography.bodyMedium)
-                    Text("\(state.member(request.fromID)?.name ?? "avoin") → \(state.member(request.toID)?.name ?? "")")
+                    Text(verbatim: "\(state.member(request.fromID)?.name ?? String(localized: "avoin")) → \(state.member(request.toID)?.name ?? "")")
                       .font(AppTypography.caption).foregroundColor(AppColor.textSecondary)
                   }
                   Spacer()
@@ -88,15 +94,15 @@ struct MeetingView: View {
             }
           }
 
-          SectionHeader(title: "Kenellä on mitäkin", subtitle: "\(agenda.from.finnishShortString)–\(agenda.to.finnishShortString)")
+          SectionHeader(title: String(localized: "Kenellä on mitäkin"), subtitle: "\(DateText.dayMonth(agenda.from))–\(DateText.dayMonth(agenda.to))")
           ForEach(agenda.upcomingByResponsible(order: state.adults.map(\.id))) { group in
             let member = state.member(group.memberID)
             Card {
               HStack {
                 MemberAvatar(member: member, size: 30)
-                Text(member?.name ?? "Avoimet").font(AppTypography.headline)
+                Text(member?.name ?? String(localized: "Avoimet")).font(AppTypography.headline)
                 Spacer()
-                Text("\(group.tasks.count)").font(AppTypography.headline).foregroundColor(AppColor.textSecondary)
+                Text(verbatim: "\(group.tasks.count)").font(AppTypography.headline).foregroundColor(AppColor.textSecondary)
               }
               ForEach(group.tasks) { task in
                 meetingTaskRow(task)
@@ -104,33 +110,33 @@ struct MeetingView: View {
             }
           }
           if agenda.upcoming.isEmpty {
-            EmptyState(systemImage: "checkmark.seal", title: "Rauhallinen jakso", message: "Ei tehtäviä tällä aikavälillä.")
+            EmptyState(systemImage: "checkmark.seal", title: String(localized: "Rauhallinen jakso"), message: String(localized: "Ei tehtäviä tällä aikavälillä."))
           }
 
           if !agenda.overdue.isEmpty {
-            SectionHeader(title: "Myöhässä", count: agenda.overdue.count)
+            SectionHeader(title: String(localized: "Myöhässä"), count: agenda.overdue.count)
             Card {
               ForEach(agenda.overdue) { meetingTaskRow($0) }
             }
           }
 
           if !agenda.birthdays.isEmpty {
-            SectionHeader(title: "Synttärit")
+            SectionHeader(title: String(localized: "Synttärit"))
             Card {
               ForEach(agenda.birthdays) { item in
-                Label("\(state.member(item.memberID)?.name ?? "") \(item.day.relativeText())", systemImage: "gift.fill")
+                Label((state.member(item.memberID)?.name ?? "") + " " + item.day.relativeText(), systemImage: "gift.fill")
                   .font(AppTypography.body)
               }
             }
           }
 
           if kind == .monthly && !agenda.comingFromYearClock.isEmpty {
-            SectionHeader(title: "Vuosikellosta tulossa", subtitle: "Luodaan automaattisesti ajoissa")
+            SectionHeader(title: String(localized: "Vuosikellosta tulossa"), subtitle: String(localized: "Luodaan automaattisesti ajoissa"))
             Card {
               ForEach(agenda.comingFromYearClock, id: \.key) { occurrence in
                 HStack {
                   VStack(alignment: .leading, spacing: 2) {
-                    Text(occurrence.template.title + (state.member(occurrence.memberID).map { ": \($0.name)" } ?? ""))
+                    Text(occurrence.displayTitle(in: state))
                       .font(AppTypography.bodyMedium)
                     Text("\(occurrence.eventDay.relativeText()) · valmistelu \(occurrence.prepDay.relativeText())")
                       .font(AppTypography.caption).foregroundColor(AppColor.textSecondary)
@@ -144,7 +150,7 @@ struct MeetingView: View {
             }
           }
 
-          SectionHeader(title: kind == .weekly ? "Kuorma tällä viikolla" : "Miten jako on mennyt")
+          SectionHeader(title: kind == .weekly ? String(localized: "Kuorma tällä viikolla") : String(localized: "Miten jako on mennyt"))
           Card {
             ForEach(agenda.load.rows) { row in
               HStack {
@@ -164,7 +170,7 @@ struct MeetingView: View {
           }
 
           if log != nil {
-            PrimaryButton(title: "Lopeta ja näytä yhteenveto", systemImage: "checkmark") {
+            PrimaryButton(title: String(localized: "Lopeta ja näytä yhteenveto"), systemImage: "checkmark") {
               summary = log?.changes(in: model.state) ?? []
             }
           }
@@ -214,7 +220,7 @@ struct MeetingSummaryView: View {
     NavigationStack {
       Screen {
         VStack(alignment: .leading, spacing: AppSpacing.md) {
-          TitleSection(title: "Sovitut muutokset", subtitle: kind == .weekly ? "Viikkopalaveri" : "Kuukausipalaveri")
+          TitleSection(title: String(localized: "Sovitut muutokset"), subtitle: kind == .weekly ? String(localized: "Viikkopalaveri") : String(localized: "Kuukausipalaveri"))
           Card {
             if changes.isEmpty {
               Text("Ei muutoksia. Kaikki pysyy ennallaan.").foregroundColor(AppColor.textSecondary)
@@ -224,7 +230,7 @@ struct MeetingSummaryView: View {
                 .font(AppTypography.body)
             }
           }
-          PrimaryButton(title: "Tallenna ja lopeta", systemImage: "checkmark") {
+          PrimaryButton(title: String(localized: "Tallenna ja lopeta"), systemImage: "checkmark") {
             onSave()
             dismiss()
           }

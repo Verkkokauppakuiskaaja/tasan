@@ -25,8 +25,8 @@ struct TitleSection: View {
 struct TitleSection_Previews: PreviewProvider {
   static var previews: some View {
     TitleSection(
-      title: "Tarkista tapahtuma",
-      subtitle: "Tarkista tiedot ennen tallennusta."
+      title: String(localized: "Tarkista tapahtuma"),
+      subtitle: String(localized: "Tarkista tiedot ennen tallennusta.")
     )
     .padding()
     .previewLayout(.sizeThatFits)

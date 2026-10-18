@@ -221,14 +221,15 @@ public struct MeetingChangeLog: Equatable, Sendable {
         let title = state.subjectTitle(entry.subject)
         let to = state.member(entry.toID)?.name
         let from = state.member(entry.fromID)?.name
+        let open = CoreText.text("avoin")
         switch entry.kind {
-        case .transferred: return "\(title): \(from ?? "avoin") → \(to ?? "avoin")"
-        case .transferRequested: return "\(title): pyyntö \(to ?? "") odottaa vastausta"
-        case .taken: return "\(title): \(to ?? "") otti hoitaakseen"
-        case .released: return "\(title): avattiin kenen tahansa otettavaksi"
-        case .completed: return "\(title): kuitattu hoidetuksi"
-        case .helpRequested: return "\(title): pyydetty apua (\(entry.note ?? ""))"
-        case .created: return entry.note == "Vuosikello" ? nil : "Uusi: \(title)"
+        case .transferred: return CoreText.format("%@: %@ → %@", title, from ?? open, to ?? open)
+        case .transferRequested: return CoreText.format("%@: pyyntö %@ odottaa vastausta", title, to ?? "")
+        case .taken: return CoreText.format("%@: %@ otti hoitaakseen", title, to ?? "")
+        case .released: return CoreText.format("%@: avattiin kenen tahansa otettavaksi", title)
+        case .completed: return CoreText.format("%@: kuitattu hoidetuksi", title)
+        case .helpRequested: return CoreText.format("%@: pyydetty apua (%@)", title, entry.note ?? "")
+        case .created: return entry.note == HistoryEntry.yearClockNote ? nil : CoreText.format("Uusi: %@", title)
         case .transferDeclined, .transferCancelled, .returned, .reopened: return nil
         }
       }

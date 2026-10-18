@@ -1,0 +1,99 @@
+{
+  "sourceLanguage" : "fi",
+  "strings" : {
+    "CFBundleDisplayName" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "fi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Tasan!"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
+    "CFBundleName" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "fi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "$(PRODUCT_NAME)"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
+    "NSCalendarsFullAccessUsageDescription" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tasan! writes the tasks you're responsible for to its own Tasan! calendar and reads your other plans so overlaps are spotted and the family calendar shows everyone's plans."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Tasan! kirjoittaa vastuullasi olevat tehtävät omaan Tasan!-kalenteriinsa ja lukee muut menosi, jotta päällekkäisyydet huomataan ja perheen kalenteri näyttää kaikkien menot."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tasan! skriver uppgifterna du ansvarar för i sin egen Tasan!-kalender och läser dina andra åtaganden så att överlappningar upptäcks och familjens kalender visar allas åtaganden."
+          }
+        }
+      }
+    },
+    "NSCameraUsageDescription" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "With the camera you can photograph a school notice or a party invitation, and Tasan! turns it into a task."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Kameralla voit kuvata koulun tiedotteen tai synttärikutsun, ja Tasan! tekee siitä tehtävän."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Med kameran kan du fotografera ett meddelande från skolan eller en kalasinbjudan, och Tasan! gör en uppgift av det."
+          }
+        }
+      }
+    },
+    "NSPhotoLibraryUsageDescription" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You can choose a screenshot or a photo for Tasan! to pick the event from."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Voit valita kuvakaappauksen tai kuvan, josta Tasan! poimii tapahtuman."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Du kan välja en skärmbild eller en bild som Tasan! plockar ut händelsen från."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

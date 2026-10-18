@@ -158,9 +158,9 @@ enum OCRServiceError: LocalizedError {
   var errorDescription: String? {
     switch self {
     case .invalidImage:
-      return "Kuvaa ei voitu käsitellä."
+      return String(localized: "Kuvaa ei voitu käsitellä.")
     case .noTextRecognized:
-      return "Kuvasta ei löytynyt luettavaa tekstiä."
+      return String(localized: "Kuvasta ei löytynyt luettavaa tekstiä.")
     }
   }
 }
