@@ -887,6 +887,22 @@
         }
       }
     },
+    "Avaa iPhonen asetukset, joissa voit vaihtaa Tasanin kielen. Sovellus käynnistyy uudelleen valitulla kielellä." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens the iPhone settings, where you can change Tasan's language. The app restarts in the language you choose."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppnar iPhones inställningar, där du kan byta språk för Tasan. Appen startar om på det valda språket."
+          }
+        }
+      }
+    },
     "Avoimet" : {
       "localizations" : {
         "en" : {
@@ -1651,6 +1667,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Längd %@"
+          }
+        }
+      }
+    },
+    "Kieli" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Språk"
           }
         }
       }
