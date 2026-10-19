@@ -4,6 +4,7 @@ import TasanCore
 struct SettingsView: View {
   @Environment(AppModel.self) private var model
   @Environment(\.dismiss) private var dismiss
+  @Environment(\.openURL) private var openURL
   @State private var editingMember: Member?
   @State private var isAddingChild = false
   @State private var isConfirmingLeave = false
@@ -120,6 +121,16 @@ struct SettingsView: View {
           Text("Oma kalenteri")
         } footer: {
           Text("Lupa on henkilökohtainen: jokainen aikuinen yhdistää oman kalenterinsa omalla puhelimellaan. Tasan! kirjoittaa vain omaan Tasan!-kalenteriinsa ja lukee muita kalentereita päällekkäisyyksien ja perheen kalenterin vuoksi. Ilman nimiä toinen aikuinen näkee menosi vain merkinnällä Varattu.")
+        }
+
+        Section {
+          Button {
+            if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
+          } label: {
+            LabeledContent("Kieli", value: AppLanguage.currentName)
+          }
+        } footer: {
+          Text("Avaa iPhonen asetukset, joissa voit vaihtaa Tasanin kielen. Sovellus käynnistyy uudelleen valitulla kielellä.")
         }
 
         Section("Ilmoitukset") {

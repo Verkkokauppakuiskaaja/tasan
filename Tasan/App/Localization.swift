@@ -19,6 +19,12 @@ enum AppLanguage {
   static var current: String {
     Bundle.main.preferredLocalizations.first ?? "fi"
   }
+
+  /// The interface language in its own words: "suomi", "English", "svenska".
+  static var currentName: String {
+    let locale = Locale(identifier: current)
+    return locale.localizedString(forLanguageCode: current)?.capitalized(with: locale) ?? current
+  }
 }
 
 enum DateText {
